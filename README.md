@@ -1,128 +1,113 @@
-# Ethereum Block Explorer
+# ChainScope Explorer
 
-The lessons this week covered the Ethereum JSON-RPC API and the `ethers.js` library giving us the ability to query the Ethereum blockchain and make transactions!
+ChainScope is a Sepolia based Ethereum block explorer I built with React and the Alchemy SDK.
+It helps users inspect blocks, transactions, wallet activity, NFT metadata, and saved watchlists from one interface.
+The project was built as a hands on blockchain learning exercise focused on understanding how to fetch and present on-chain data.
+Instead of cloning a full Etherscan like product, the goal however was to build a clean, modern explorer that makes blockchain data easier to understand.
 
-Let's put that knowledge to the test by building our very own **Ethereum Block Explorer**!
+## Overview
 
-Blockexplorers give us the ability to view lots of different information about the blockchain including data about:
-  * the blockchain network itself
-  * blocks in the blockchain
-  * transactions in a block
-  * accounts
-  * and many other things
-  
-[Etherscan](https://etherscan.io/) is a good example of an Ethereum blockexplorer. Check it out to get familiar with how blockexplorers generally work.
+I designed ChainScope to help users explore blockchain activity through a polished interface while learning how to work with Alchemy's SDK and Ethereum data structures.
 
-This particular project is very much open-ended. We'll add some challenges here to get your imagination going, but use Etherscan as a guide for features you might consider building in your project.
+## Built With
+
+- React
+- React Router
+- Alchemy SDK
+- CSS
+
+## Features
+
+- Recent Sepolia block activity on the home page
+- Clickable block list with block details
+- Transaction detail pages with status tracking
+- Wallet lookup by address
+- Wallet watchlist saved in local storage
+- Incoming transfer history for wallet addresses
+- NFT metadata lookup by contract address and token ID
+- Global search for block numbers, transaction hashes, and wallet addresses
+- Responsive explorer UI with a custom dashboard style layout
+
+## Pages
+
+### Home
+- Shows the latest block number
+- Displays recent Sepolia blocks
+- Lets users drill into block details
+
+### Block Details
+- Displays block metadata
+- Shows block hash, miner, timestamp, gas used, gas limit, and transaction count
+- Lists the first 10 transactions in the selected block
+
+### Transaction Details
+- Displays transaction data and receipt data
+- Shows pending, mined success, or mined failed status
+- Includes sender, receiver, value, gas limit, gas price, and gas used
+
+### Account Lookup
+- Lets users search for a wallet address
+- Shows wallet balance and nonce
+- Displays incoming transfer activity
+- Allows addresses to be saved to a watchlist
+
+### Watchlist
+- Displays saved wallet addresses
+- Allows quick navigation back to saved accounts
+- Supports removing saved wallets
+
+### NFT Lookup
+- Fetches NFT metadata using a contract address and token ID
+- Shows NFT title, description, image, token type, collection info, and contract details
 
 ## Getting Started
 
-Clone this project to pull down some basic starter code.
+### 1. Install dependencies
 
-After that cd into the base directory of the project and run `npm install` to download all the project dependencies.
-
-In this project we chose to use React for a front-end and added minimal front-end code to get you going, but feel free to use any front-end stack you like.
-
-Unlike the lessons this week that used the Ethereum JSON-RPC API and the `ethers.js` library to communicate with the Ethereum network, the starter code in this project uses the [AlchemySDK](https://docs.alchemy.com/reference/alchemy-sdk-quickstart?a=eth-bootcamp). The AlchemySDK's core package wraps almost all of the `ethers.js` provider functionality that we learned about and should feel very familiar to you. 
-
-For example, the following `ethers.js` code
-```js
-const blockNumber = await provider.getBlockNumber();
-```
-can be written using the AlchemySDK like so:
-```js
-const blockNumber = await alchemy.core.getBlockNumber()
-```
-Another `ethers.js ` example
-```js
-const transcations = await provider.getBlockWithTransactions(SOME_BLOCK_NUMBER)
-```
-translates to
-```js
-const transactions = await alchemy.core.getBlockWithTransactions(SOME_BLOCK_NUMBER)
-```
-and so on.
-
-There are some `ethers.js` provider functions that are not often-used and therefore not included in `alchemy.core`. But if you ever need the full ethers provider functionality you can access the provider directly with the following code:
-```js
-const ethersProvider = await alchemy.config.getProvider();
+```bash
+npm install
 ```
 
-You can find lots of good docs on the AlchemySDK here:
-  * [API Quickstart](https://docs.alchemy.com/reference/alchemy-sdk-quickstart?a=eth-bootcamp)
-  * [API Overview](https://docs.alchemy.com/reference/api-overview?a=eth-bootcamp)
+### 2. Add your environment variable
 
-Alright, without further ado, let's get started!
+Create a `.env` file in the project root and add:
 
-## 1. Create a unique Alchemy API key
-
-If you have not already done so, create a unique Alchemy API Mainnet key
-for your project as [described here](https://docs.alchemy.com/reference/api-overview?a=eth-bootcamp).
-
-## 2. Add your API key to as an environment variable for the project
-
-Create an empty `.env` file in the base directory of this project.
-
-Add the following line to the `.env` file replacing `YOUR_ALCHEMY_API_KEY` with your api key.
-
-```sh
-REACT_APP_ALCHEMY_API_KEY=YOUR_ALCHEMY_API_KEY
+```bash
+REACT_APP_ALCHEMY_API_KEY=your_alchemy_api_key_here
 ```
 
-Do not remove the `REACT_APP_` prefix. React uses that to import env variables.
+This project is configured to use the Sepolia testnet.
 
-**⚠️ Note**
+### 3. Start the development server
 
-> Your Alchemy API Mainnet Key is a sensitive piece of data. If we were\
-> building an enterprise app to conquer the world we would never place\
-> this sensitive data in the client code of our blockexplorer project that\
-> could potentially be read by anyone.
->
-> But hey, we're just learning this stuff right now, not conquering anything\
-> yet! :-) It won't be the end of the world to put the Alchemy API key in our\
-> front-end code for this project.
+```bash
+npm start
+```
 
-## 3. Start the webserver
+### 4. Build for production
 
-`npm start`
+```bash
+npm run build
+```
 
-Running the command above will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Notes
 
-The webpage will automatically reload when you make code changes.
+- This project uses the Ethereum Sepolia testnet, not Ethereum mainnet.
+- The API key is loaded from `.env` and should not be committed.
+- Wallet watchlist data is stored locally in the browser using local storage.
 
-What you'll see in the browser is Ethereum Mainnet's current block number. Not very exciting, but that's where you come in to save the day!
+## Learning Goal
 
-## 4. Make the blockexplorer cool!
+This project was built as part of my blockchain development growth and it focuses on learning how to:
+- fetch blockchain data
+- structure a React app feature by feature
+- work with Alchemy SDK methods
+- display blockchain data in a readable way
 
-The starter code pulls down the current block number for you.
+## Future improvements i'm looking to add
 
-Can you get more information about the current block and display it in the page?
-Take a look at [alchemy.core.getBlock()](https://docs.alchemy.com/reference/sdk-getblock?a=eth-bootcamp) for how you might go about that.
-
-Blocks contains transactions. Can you get the list of transactions for a given block? Can you use [alchemy.core.getBlockWithTransactions()](https://docs.alchemy.com/reference/sdk-getblockwithtransactions?a=eth-bootcamp) for this?
-
-How about getting details for individual transactions? The [alchemy.core.getTransactionReceipt()](https://docs.alchemy.com/reference/sdk-gettransactionreceipt?a=eth-bootcamp) looks handy.
-
-## 5. More ideas to think about
-
-- Connecting the dots.
-  - Allow users to click on a block listed in the webpage to get the block's details including its list of transactions
-  - From the list of transactions allow users to click on specific transactions to get the details of the transaction
-- Make an accounts page where a user can look up their balance or someone else's balance
-
-## 6. Supercharge your blockexplorer using AlchemySDK's specialized APIs
-
-By using the AlchemySDK you can really supercharge your projects with additional API functionality that isn't included in the `ethers.js` package including:
-  * NFT methods
-  * WebSocket methods
-  * Alchemy's Transact API functionality
-  * endpoints for using Alchemy's Notify Webhooks
-
-Read more about the above in the [Alchemy SDK Surface docs](https://docs.alchemy.com/reference/alchemy-sdk-api-surface-overview?a=eth-bootcamp). Using the SDK can implement the following features?
-
-- Given a contract address and token id, can you get the NFT's metadata?
-- What is the floor price of an NFT right now?
-- Did a pending transaction get mined?
-- What transfers did an address receive this year?
-
-Good luck and have fun!
+- Better formatting for gas and token values
+- Pagination for large transaction lists
+- Relative live updating timestamps
+- More advanced wallet activity analytics
+- Additional NFT insights and pricing data
