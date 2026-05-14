@@ -1,0 +1,278 @@
+src/
+  app/
+    routes.js
+  pages/
+    HomePage.js
+    BlockPage.js
+    TransactionPage.js
+    AccountPage.js
+    NftPage.js
+  components/
+    SearchBar.js
+    PageLayout.js
+    StatCard.js
+    BlockList.js
+    BlockRow.js
+    TransactionList.js
+    TransactionRow.js
+    AddressSummary.js
+    BalanceCard.js
+    TransfersList.js
+    NftLookupForm.js
+    NftMetadataCard.js
+    LoadingState.js
+    ErrorState.js
+  services/
+    alchemyClient.js
+    blockService.js
+    transactionService.js
+    accountService.js
+    transferService.js
+    nftService.js
+  hooks/
+    useRecentBlocks.js
+    useBlockDetails.js
+    useTransactionDetails.js
+    useAccountDetails.js
+    useAddressTransfers.js
+    useNftMetadata.js
+  utils/
+    formatEth.js
+    formatAddress.js
+    formatHash.js
+    formatTimestamp.js
+    constants.js
+
+Why I’d use this structure:
+
+pages should describe app screens, not data logic.
+components should render data they are given.
+services isolate Alchemy SDK usage so you can change queries without rewriting UI.
+hooks keep async logic reusable and prevent repeated loading/error/data code in every page.
+utils avoid duplicated formatting logic across the app.
+Component Explanations
+
+PageLayout
+
+Wraps the app shell: header, navigation, page container.
+Reason: layout should be consistent across all routes, and you do not want each page rebuilding the same shell.
+SearchBar
+
+Lets the user enter a block number, tx hash, or address.
+Reason: search is central to block explorers. It should be reusable and route users to the correct page.
+StatCard
+
+Displays one key value like block number, gas used, balance, timestamp.
+Reason: blockchain data is naturally key-value heavy, so one generic display card reduces repeated UI markup.
+BlockList
+
+Renders a list of recent blocks.
+Reason: the home page needs a quick drill-down entry point.
+BlockRow
+
+One block item in the list.
+Reason: separating row from list makes the list easier to read and later customize.
+TransactionList
+
+Renders transactions for a selected block or address.
+Reason: transactions appear in more than one place, so this should not be hardcoded into only the block page.
+TransactionRow
+
+One transaction preview row.
+Reason: same reason as BlockRow; keeps rendering isolated and reusable.
+AddressSummary
+
+Shows normalized address info, maybe ENS if available, and quick links.
+Reason: account pages need a clear header summary before showing balance or transfer history.
+BalanceCard
+
+Shows ETH balance and maybe nonce/transaction count.
+Reason: balance is a distinct concept and deserves a clean dedicated component.
+TransfersList
+
+Displays incoming/outgoing transfers for an address.
+Reason: transfer history is separate from raw transactions and often easier for users to understand.
+NftLookupForm
+
+Collects contract address and token id.
+Reason: NFT lookups need input controls and validation, which should be kept separate from display.
+NftMetadataCard
+
+Shows image, name, description, collection, token type, attributes.
+Reason: NFT metadata is structurally different from block/tx/account data.
+LoadingState
+
+Shared loading spinner or skeleton.
+Reason: every page will load async blockchain data.
+ErrorState
+
+Shared error display.
+Reason: RPC/API failures are common enough that error handling should be consistent.
+Service Layer Explanations
+
+alchemyClient.js
+
+Creates and exports the configured Alchemy instance.
+Reason: there should be one place where network and API key configuration live.
+blockService.js
+
+Functions like:
+getLatestBlockNumber
+getBlockByNumber
+getBlockWithTransactions
+maybe getRecentBlocks
+Reason: block-related logic belongs together and should not leak into pages.
+transactionService.js
+
+Functions like:
+getTransaction
+getTransactionReceipt
+getMinedStatus
+Reason: transaction details often need multiple SDK calls, and that composition belongs in a service.
+accountService.js
+
+Functions like:
+getBalance
+getTransactionCount
+Reason: account lookups are distinct from transaction detail lookups.
+transferService.js
+
+Functions like:
+getTransfersForAddress
+filtering received transfers for a date range
+Reason: transfers are one of your learning goals and deserve their own focused module.
+nftService.js
+
+Functions like:
+getNftMetadata
+optional getNftFloorPrice
+Reason: NFT methods are a separate Alchemy API area, so isolating them keeps the app easy to reason about.
+Why use services instead of calling SDK methods directly in components:
+
+UI becomes easier to read.
+Testing and debugging become easier.
+If Alchemy response shapes are awkward, you normalize them once in the service instead of everywhere.
+Hook Explanations
+
+useRecentBlocks
+
+Fetches and stores latest blocks for home page.
+Reason: async fetching plus loading/error state is repetitive; a hook centralizes that behavior.
+useBlockDetails
+
+Loads block metadata and transactions for a block page.
+Reason: a block page should focus on rendering, not the mechanics of fetching and retrying.
+useTransactionDetails
+
+Combines transaction info and receipt info.
+Reason: tx details often require more than one request.
+useAccountDetails
+
+Loads balance and account-level info.
+Reason: keeps account page clean and focused.
+useAddressTransfers
+
+Loads transfers filtered by address and possibly date range.
+Reason: transfer queries may evolve, and the page should not carry all that logic itself.
+useNftMetadata
+
+Loads NFT data based on contract and token id.
+Reason: form input and fetch state are easier to manage in a dedicated hook.
+Why use hooks here:
+
+In React, hooks are the natural place for reusable async state logic.
+They avoid copy-pasting useEffect, useState, loading, and error handling across pages.
+They are simpler than introducing a full state library for a bootcamp project.
+Why I am not recommending heavier patterns
+
+I would avoid:
+
+Redux
+React Query at the start
+a backend server right now
+database persistence
+webhook ingestion in phase one
+Reason:
+
+Your stated goal is to learn blockchain reads and how to fetch data from Alchemy.
+Those tools add complexity before you have finished the core explorer.
+For a bootcamp assignment, clarity matters more than completeness.
+Recommended Methods by Feature
+
+For latest block and recent blocks:
+
+Start with alchemy.core.getBlockNumber()
+Then fetch recent blocks individually or by block number
+Reason: this teaches the block model clearly
+For block details:
+
+Use alchemy.core.getBlock()
+Use alchemy.core.getBlockWithTransactions() when you need tx objects
+Reason: block page is the natural drill-down step
+For transaction details:
+
+Use transaction fetch plus receipt fetch
+Reason: transaction core data and mined status are often split
+For account balance:
+
+Use alchemy.core.getBalance(address)
+Reason: this is the simplest and most fundamental account query
+For transfers received this year:
+
+Use Alchemy asset transfer methods with filters
+Reason: this is more meaningful than trying to reconstruct transfer history manually from raw blocks
+For NFT metadata:
+
+Use Alchemy NFT methods
+Reason: this is exactly what the specialized SDK is good at
+For “did a pending transaction get mined?”
+
+Start with polling by tx hash
+Reason: simpler than WebSocket, easier to understand, good for learning
+Later, if you want, add WebSocket subscriptions as an enhancement
+What to defer
+
+WebSocket methods
+
+Good as a second phase for realtime updates
+Not required for the first clean version
+Notify Webhooks
+
+Better if you later add a backend
+Not ideal for a frontend-only learning app
+Transact API
+
+Not necessary for a block explorer
+Better suited to sending transactions, wallet actions, or gas abstraction workflows
+Floor price
+
+Nice extra if the SDK makes it easy
+Not core to a block explorer assignment
+Suggested build sequence
+
+App shell and router
+Home page with latest block number and recent blocks
+Block details page with transaction list
+Transaction details page
+Account page with balance lookup
+Transfers for address this year
+NFT metadata lookup
+Optional realtime status improvements
+This order is deliberate:
+
+each feature builds on concepts from the last one
+it starts with the core chain entities: blocks, txs, accounts
+it saves specialized APIs for after the core explorer works
+One important design decision
+
+I would keep the app frontend-only for now even though exposing the API key in a real app is not ideal.
+
+Why:
+
+your README already assumes that model
+it is acceptable for a bootcamp learning exercise
+adding a backend now would distract from the blockchain concepts
+If you want, the next step should be one of these two:
+
+I draft the exact data flow for each page, including which Alchemy methods each page should call.
+I review your current App.js and tell you how to refactor it into the first route and component set, without changing code yet.

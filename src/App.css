@@ -812,6 +812,171 @@
   }
 }
 
+@media (max-width: 640px) {
+  .app-header {
+    padding: 20px 14px 18px;
+  }
+
+  .app-header__inner {
+    gap: 16px;
+  }
+
+  .brand-block__title {
+    font-size: 1.5rem;
+  }
+
+  .app-nav {
+    gap: 8px;
+  }
+
+  .app-nav a {
+    padding: 8px 12px;
+    font-size: 0.92rem;
+  }
+
+  .hero-panel {
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  .hero-panel__copy,
+  .search-panel,
+  .info-card,
+  .stat-card,
+  .detail-card,
+  .nft-form-card,
+  .nft-metadata-card,
+  .lookup-form-card,
+  .status-banner,
+  .block-row,
+  .transaction-row,
+  .transfer-row,
+  .watchlist-item {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .hero-panel__copy h1 {
+    font-size: 1.75rem;
+    line-height: 1.05;
+  }
+
+  .hero-panel__copy p:last-child,
+  .page-heading p,
+  .search-panel__header p,
+  .info-card p,
+  .stat-card__note,
+  .detail-card__hint,
+  .page-message,
+  .section-note {
+    font-size: 0.95rem;
+  }
+
+  .app-main {
+    width: min(1120px, calc(100% - 24px));
+    padding: 22px 0 32px;
+  }
+
+  .page-section {
+    gap: 20px;
+  }
+
+  .page-heading {
+    padding: 0;
+  }
+
+  .page-heading h2 {
+    font-size: 1.65rem;
+  }
+
+  .search-panel__header h2,
+  .block-list__header h2,
+  .transaction-list__header h2,
+  .transfers-list__header h2,
+  .watchlist__header h2,
+  .nft-form-card__header h2,
+  .nft-metadata-card__header h2,
+  .lookup-form-card__header h2 {
+    font-size: 1.3rem;
+  }
+
+  .search-form,
+  .lookup-form,
+  .nft-form {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .search-form__label,
+  .lookup-form__label,
+  .nft-form__label {
+    font-size: 0.88rem;
+  }
+
+  .search-form__input,
+  .lookup-form__input,
+  .nft-form__input {
+    padding: 13px 14px;
+    border-radius: 14px;
+    font-size: 0.96rem;
+  }
+
+  .search-form__button,
+  .lookup-form__button,
+  .nft-form__button,
+  .account-actions__button,
+  .watchlist-item__link,
+  .watchlist-item__button {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .status-banner__value {
+    font-size: 1.65rem;
+  }
+
+  .stat-card__value {
+    font-size: 1.6rem;
+  }
+
+  .block-row,
+  .transaction-row,
+  .transfer-row,
+  .watchlist-item {
+    gap: 12px;
+  }
+
+  .block-row__value {
+    font-size: 1.3rem;
+  }
+
+  .transaction-row__value,
+  .transfer-row__value,
+  .watchlist-item__value,
+  .detail-card__value {
+    font-size: 0.98rem;
+  }
+
+  .block-row__meta,
+  .transaction-row__meta,
+  .transfer-row__meta,
+  .watchlist-item__actions {
+    gap: 8px;
+  }
+
+  .account-actions,
+  .watchlist-item__actions {
+    display: grid;
+    gap: 10px;
+  }
+
+  .nft-metadata-card__image {
+    height: 220px;
+  }
+}
+
 @media (max-width: 720px) {
   .block-row,
   .transaction-row,

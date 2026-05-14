@@ -11,7 +11,7 @@ function PageLayout({ children }) {
           <div className="brand-block">
           <p className="brand-block__eyebrow">Sepolia Testnet Explorer</p>
             <NavLink exact className="brand-block__title" to="/">
-              ChainScope
+              BlockScan
             </NavLink>
           </div>
 

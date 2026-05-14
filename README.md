@@ -1,113 +1,217 @@
-# ChainScope Explorer
+# BlockScan
 
-ChainScope is a Sepolia based Ethereum block explorer I built with React and the Alchemy SDK.
-It helps users inspect blocks, transactions, wallet activity, NFT metadata, and saved watchlists from one interface.
-The project was built as a hands on blockchain learning exercise focused on understanding how to fetch and present on-chain data.
-Instead of cloning a full Etherscan like product, the goal however was to build a clean, modern explorer that makes blockchain data easier to understand.
+BlockScan is a modern Ethereum Sepolia block explorer built with React and the Alchemy SDK.
+The application helps users inspect blockchain activity through a clean and responsive interface for exploring blocks, transactions, wallet activity, NFT metadata, and persistent wallet watchlists.
 
-## Overview
+Rather than replicating a full Etherscan-style platform, the goal of BlockScan was to design a more approachable and visually structured explorer focused on readability, usability, and real-time blockchain data visualization.
 
-I designed ChainScope to help users explore blockchain activity through a polished interface while learning how to work with Alchemy's SDK and Ethereum data structures.
+---
 
-## Built With
+## Live Demo
 
-- React
-- React Router
-- Alchemy SDK
-- CSS
+Live Demo: 
 
-## Features
+---
 
-- Recent Sepolia block activity on the home page
-- Clickable block list with block details
-- Transaction detail pages with status tracking
-- Wallet lookup by address
-- Wallet watchlist saved in local storage
-- Incoming transfer history for wallet addresses
-- NFT metadata lookup by contract address and token ID
-- Global search for block numbers, transaction hashes, and wallet addresses
-- Responsive explorer UI with a custom dashboard style layout
+## Screenshots
 
-## Pages
+Add screenshots for:
 
-### Home
-- Shows the latest block number
-- Displays recent Sepolia blocks
-- Lets users drill into block details
+* Dashboard / Home page
+* Transaction details page
+* Wallet lookup page
+* NFT lookup page
+* Mobile responsive layout
+
+---
+
+## Engineering Focus
+
+This project focuses on:
+
+* Real-time blockchain data visualization
+* Frontend architecture and reusable UI systems
+* API and RPC integration workflows
+* Responsive dashboard interface design
+* Blockchain data formatting and readability
+* State-driven UI rendering and navigation flows
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React
+* React Router
+* JavaScript
+* CSS
+
+### Blockchain & Data
+
+* Alchemy SDK
+* Ethereum Sepolia Network
+
+---
+
+## Core Features
+
+* Real-time Sepolia block activity dashboard
+* Clickable block explorer with detailed block inspection
+* Transaction detail pages with transaction receipt and status tracking
+* Wallet lookup by Ethereum address
+* Persistent wallet watchlist using browser local storage
+* Incoming transfer history visualization
+* NFT metadata lookup using contract address and token ID
+* Unified search workflow for:
+
+  * block numbers
+  * transaction hashes
+  * wallet addresses
+* Responsive dashboard UI optimized for desktop and mobile layouts
+
+---
+
+## Application Pages
+
+### Home Dashboard
+
+* Displays latest Sepolia block activity
+* Shows recent blocks with quick navigation into block details
+* Provides a high-level overview of blockchain activity
 
 ### Block Details
-- Displays block metadata
-- Shows block hash, miner, timestamp, gas used, gas limit, and transaction count
-- Lists the first 10 transactions in the selected block
+
+Displays:
+
+* block hash
+* miner address
+* timestamp
+* gas used
+* gas limit
+* transaction count
+
+Also includes the first 10 transactions within the selected block.
 
 ### Transaction Details
-- Displays transaction data and receipt data
-- Shows pending, mined success, or mined failed status
-- Includes sender, receiver, value, gas limit, gas price, and gas used
+
+Displays:
+
+* transaction status
+* sender and receiver addresses
+* transaction value
+* gas limit
+* gas price
+* gas used
+* receipt information
+
+Supports:
+
+* pending transactions
+* successful mined transactions
+* failed transactions
 
 ### Account Lookup
-- Lets users search for a wallet address
-- Shows wallet balance and nonce
-- Displays incoming transfer activity
-- Allows addresses to be saved to a watchlist
+
+Allows users to:
+
+* search wallet addresses
+* view wallet balances
+* inspect nonce values
+* explore incoming transfer history
+* save wallet addresses to a persistent watchlist
 
 ### Watchlist
-- Displays saved wallet addresses
-- Allows quick navigation back to saved accounts
-- Supports removing saved wallets
+
+* Displays saved wallet addresses
+* Enables quick navigation back to tracked accounts
+* Supports watchlist management and removal
 
 ### NFT Lookup
-- Fetches NFT metadata using a contract address and token ID
-- Shows NFT title, description, image, token type, collection info, and contract details
+
+Fetches and displays NFT metadata using:
+
+* contract address
+* token ID
+
+Displays:
+
+* NFT title
+* description
+* collection information
+* token type
+* contract details
+* NFT image preview
+
+---
+
+## Architecture Notes
+
+The application was structured feature-by-feature to keep components modular and maintainable.
+
+Frontend workflows were designed around:
+
+* reusable UI patterns
+* route-driven navigation
+* isolated data-fetching logic
+* scalable blockchain visualization systems
+* responsive dashboard layouts
+
+The project also focuses on presenting complex blockchain data in a way that feels easier to navigate and understand for users exploring Ethereum activity.
+
+---
 
 ## Getting Started
 
-### 1. Install dependencies
+### 1. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Add your environment variable
+### 2. Configure Environment Variables
 
-Create a `.env` file in the project root and add:
+Create a `.env` file in the project root:
 
 ```bash
 REACT_APP_ALCHEMY_API_KEY=your_alchemy_api_key_here
 ```
 
-This project is configured to use the Sepolia testnet.
+The application is configured to use the Ethereum Sepolia testnet.
 
-### 3. Start the development server
+### 3. Start Development Server
 
 ```bash
 npm start
 ```
 
-### 4. Build for production
+### 4. Build for Production
 
 ```bash
 npm run build
 ```
 
+---
+
 ## Notes
 
-- This project uses the Ethereum Sepolia testnet, not Ethereum mainnet.
-- The API key is loaded from `.env` and should not be committed.
-- Wallet watchlist data is stored locally in the browser using local storage.
+* This project uses the Ethereum Sepolia testnet.
+* Environment variables are loaded from `.env`.
+* Wallet watchlist data is persisted using browser local storage.
+* Blockchain data is fetched using the Alchemy SDK and Ethereum RPC workflows.
 
-## Learning Goal
+---
 
-This project was built as part of my blockchain development growth and it focuses on learning how to:
-- fetch blockchain data
-- structure a React app feature by feature
-- work with Alchemy SDK methods
-- display blockchain data in a readable way
+## Future Improvements
 
-## Future improvements i'm looking to add
+Planned improvements include:
 
-- Better formatting for gas and token values
-- Pagination for large transaction lists
-- Relative live updating timestamps
-- More advanced wallet activity analytics
-- Additional NFT insights and pricing data
+* Advanced transaction filtering
+* Pagination for large transaction datasets
+* Relative live-updating timestamps
+* Enhanced wallet activity analytics
+* Better gas and token value formatting
+* Additional NFT collection insights
+* Improved search intelligence and query handling
+
+---
