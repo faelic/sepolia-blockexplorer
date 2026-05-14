@@ -9,21 +9,10 @@ Rather than replicating a full Etherscan-style platform, the goal of BlockScan w
 
 ## Live Demo
 
-Live Demo: 
+Live Demo: https://blockscan-seven.vercel.app/
 
 ---
 
-## Screenshots
-
-Add screenshots for:
-
-* Dashboard / Home page
-* Transaction details page
-* Wallet lookup page
-* NFT lookup page
-* Mobile responsive layout
-
----
 
 ## Engineering Focus
 
