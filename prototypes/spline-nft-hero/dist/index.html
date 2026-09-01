@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070A" />
+    <meta
+      name="description"
+      content="An isolated BlockScan spatial hero prototype for the Sepolia explorer."
+    />
+    <link rel="icon" href="/blockscan-aperture.svg" type="image/svg+xml" />
+    <title>BlockScan Spatial Hero Prototype</title>
+    <script type="module" crossorigin src="/assets/index-B3DI1prl.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-NlD-3Scr.css">
+  </head>
+  <body>
+    <!--
+      THESIS: BlockScan becomes a calm token observatory. It refuses the usual split-card blockchain hero.
+      OWN-WORLD: Midnight charcoal, restrained teal structure, warm signal yellow, and tangible NFT medallions.
+      STORY: Visitors recognize Sepolia, understand the explorer scope, and search by block, transaction, or wallet.
+      FIRST VIEWPORT: A compact BlockScan header floats above centered copy and search. Nine depth-layered tokens frame a protected center, with cropped foreground forms and a fading floor below.
+      FORM: User-pinned spatial WebGL hero, ranked first from the supplied motion reference. Seed: brief-locked.
+      FINISH: this pass ends with desktop/mobile verification, current documentation, and review rasters carrying their provenance
+    -->
+    <main class="spatial-hero" id="spatial-hero">
+      <div class="scene-layer" id="scene-layer" aria-hidden="true"></div>
+      <div class="atmosphere" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <div class="site-header__inner">
+          <a
+            class="brand"
+            href="#prototype-search"
+            aria-label="BlockScan home, Sepolia testnet"
+          >
+            <img
+              class="brand__mark"
+              src="/blockscan-aperture.svg"
+              alt=""
+              width="44"
+              height="44"
+              aria-hidden="true"
+            />
+            <span class="brand__network" aria-hidden="true">
+              <span>Sepolia</span>
+              <small>Testnet</small>
+            </span>
+          </a>
+
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+            aria-label="Open navigation menu"
+          >
+            <span>Menu</span>
+            <svg
+              class="nav-toggle__icon"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              aria-hidden="true"
+            >
+              <path d="m4 6 4 4 4-4" />
+            </svg>
+          </button>
+
+          <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+            <a class="is-active" href="#prototype-search" aria-current="page">Home</a>
+            <a href="/accounts">Accounts</a>
+            <a href="/nft">NFTs</a>
+            <a href="/watchlist">Watchlist</a>
+          </nav>
+        </div>
+      </header>
+
+      <section class="hero-copy" aria-labelledby="hero-title">
+        <h1 id="hero-title">Explore Sepolia.</h1>
+        <p class="hero-copy__body">Search blocks, transactions, and wallets from one place.</p>
+
+        <form class="search-form" id="prototype-search" novalidate>
+          <label class="sr-only" for="explorer-query">Search the explorer</label>
+          <div class="search-form__controls">
+            <input
+              id="explorer-query"
+              name="query"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Paste a block, wallet, or transaction"
+              aria-describedby="search-feedback"
+            />
+            <button type="submit">Search</button>
+          </div>
+          <p
+            class="search-form__feedback"
+            id="search-feedback"
+            data-default-message="Try 25869494, a 0x wallet, or a 0x transaction hash."
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Try 25869494, a 0x wallet, or a 0x transaction hash.
+          </p>
+        </form>
+      </section>
+
+      <p class="sr-only" id="scene-status" aria-live="polite">
+        Loading decorative NFT token scene.
+      </p>
+    </main>
+
+  </body>
+</html>

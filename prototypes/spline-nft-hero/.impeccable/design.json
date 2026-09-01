@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-31T12:26:56+01:00",
+  "title": "Design System: BlockScan Spatial NFT Hero Prototype",
+  "extensions": {
+    "colorMeta": {
+      "background": { "role": "neutral", "displayName": "Midnight Ground", "canonical": "#05070A" },
+      "surface": { "role": "neutral", "displayName": "Search Surface", "canonical": "#0B0F0F" },
+      "surface-elevated": { "role": "neutral", "displayName": "Elevated Surface", "canonical": "#111514" },
+      "text-primary": { "role": "neutral", "displayName": "Primary Text", "canonical": "#F3F6F2" },
+      "text-secondary": { "role": "neutral", "displayName": "Secondary Text", "canonical": "#909A95" },
+      "brand": { "role": "primary", "displayName": "Authentic Teal", "canonical": "#035352" },
+      "brand-interactive": { "role": "primary", "displayName": "Interactive Teal", "canonical": "#08706D" },
+      "brand-deep": { "role": "primary", "displayName": "Teal Deep", "canonical": "#024241" },
+      "brand-soft": { "role": "primary", "displayName": "Soft Teal Surface", "canonical": "rgba(3, 83, 82, 0.20)" },
+      "brand-hover": { "role": "primary", "displayName": "Teal Hover Edge", "canonical": "rgba(8, 112, 109, 0.48)" },
+      "signal": { "role": "accent", "displayName": "Sidecar Yellow", "canonical": "#F3E8BC" },
+      "signal-hover": { "role": "accent", "displayName": "Sidecar Yellow Hover", "canonical": "#FFF1C8" },
+      "signal-pressed": { "role": "accent", "displayName": "Sidecar Yellow Pressed", "canonical": "#DED3AA" },
+      "signal-soft": { "role": "accent", "displayName": "Soft Sidecar Yellow", "canonical": "rgba(243, 232, 188, 0.14)" },
+      "border-subtle": { "role": "neutral", "displayName": "Neutral Hairline", "canonical": "rgba(144, 154, 149, 0.20)" },
+      "border-active": { "role": "primary", "displayName": "Active Teal Hairline", "canonical": "rgba(8, 112, 109, 0.68)" },
+      "feedback-danger": { "role": "danger", "displayName": "Error Coral", "canonical": "#FFAAA3" },
+      "feedback-success": { "role": "success", "displayName": "Success Green", "canonical": "#A9C8B7" },
+      "scene-floor": { "role": "scene", "displayName": "Perspective Floor", "canonical": "#070A09" },
+      "grid-major": { "role": "scene", "displayName": "Authentic Teal Grid", "canonical": "#035352" },
+      "grid-minor": { "role": "scene", "displayName": "Deep Teal Grid", "canonical": "#024241" },
+      "token-body-near": { "role": "scene", "displayName": "Near Token Body", "canonical": "#071015" },
+      "token-body-mid": { "role": "scene", "displayName": "Mid Token Body", "canonical": "#050B0F" },
+      "token-body-far": { "role": "scene", "displayName": "Far Token Body", "canonical": "#030609" },
+      "token-rim-near": { "role": "scene", "displayName": "Near Teal Rim", "canonical": "#035352" },
+      "token-rim-mid": { "role": "scene", "displayName": "Mid Teal Rim", "canonical": "#024241" },
+      "token-rim-far": { "role": "scene", "displayName": "Far Teal Rim", "canonical": "#023534" },
+      "token-back-near": { "role": "scene", "displayName": "Near Token Back", "canonical": "#03070A" },
+      "token-back-mid": { "role": "scene", "displayName": "Mid Token Back", "canonical": "#020507" },
+      "token-back-far": { "role": "scene", "displayName": "Far Token Back", "canonical": "#010304" },
+      "light-hemisphere": { "role": "scene", "displayName": "Neutral Hemisphere", "canonical": "#9AA39E" },
+      "light-key": { "role": "scene", "displayName": "Neutral Key", "canonical": "#F0F2ED" },
+      "light-rim": { "role": "scene", "displayName": "Authentic Teal Rim Light", "canonical": "#035352" },
+      "light-fill": { "role": "scene", "displayName": "Neutral Fill", "canonical": "#59615D" },
+      "light-edge": { "role": "scene", "displayName": "Muted Teal Edge", "canonical": "#4F6C65" }
+    },
+    "typographyMeta": {
+      "display": { "family": "Space Grotesk", "size": "clamp(3.2rem, 4vw, 3.75rem) desktop", "tabletSize": "clamp(2.4rem, 5vw, 3rem)", "mobileSize": "clamp(2rem, 9vw, 2.35rem)", "weight": 700, "lineHeight": 1.05, "letterSpacing": "-0.038em desktop", "copy": "Explore Sepolia." },
+      "body": { "family": "Space Grotesk", "size": "1rem desktop", "tabletSize": "0.9375rem", "mobileSize": "0.875rem", "weight": 400, "lineHeight": 1.55, "maxWidth": "560px desktop" },
+      "network-label": { "family": "Space Grotesk", "size": "0.875rem", "mobileSize": "0.8rem", "weight": 600, "lineHeight": 1.05 },
+      "network-detail": { "family": "Space Grotesk", "size": "0.625rem", "mobileSize": "0.58rem", "weight": 500, "lineHeight": 1.1, "letterSpacing": "0.1em" },
+      "navigation": { "family": "Space Grotesk", "size": "0.92rem", "mobileSize": "0.76rem", "weight": 400 },
+      "field": { "family": "Space Grotesk", "size": "0.9375rem", "mobileSize": "0.875rem", "weight": 400 },
+      "action": { "family": "Space Grotesk", "size": "1rem", "weight": 700 }
+    },
+    "heroHierarchy": {
+      "visibleCopy": {
+        "headline": "Explore Sepolia.",
+        "supporting": "Search blocks, transactions, and wallets from one place.",
+        "placeholder": "Paste a block, wallet, or transaction",
+        "button": "Search",
+        "acceptedFormats": "Try 25869494, a 0x wallet, or a 0x transaction hash."
+      },
+      "removed": ["Sepolia Explorer central eyebrow", "Long activity and metadata paragraph"],
+      "navigation": ["Home", "Accounts", "NFTs", "Watchlist"],
+      "desktop": { "viewport": [1440, 900], "contentWidth": 720, "contentHeight": 222.9375, "contentTop": 325.03125, "contentBottom": 547.96875, "searchWidth": 700, "searchHeight": 58, "buttonWidth": 102, "buttonHeight": 48 },
+      "mobile": { "viewport": [390, 844], "headlinePixels": 35.1, "copyPixels": 14, "searchFormHeight": 144.2109375, "formatHintLines": 1, "horizontalOverflow": false }
+    },
+    "shadows": [
+      { "name": "search-ambient", "value": "0 18px 48px rgba(2, 3, 3, 0.34)" },
+      { "name": "search-focus", "value": "0 18px 48px rgba(2, 3, 3, 0.4), 0 0 0 3px rgba(3, 83, 82, 0.20)" },
+      { "name": "display-legibility", "value": "0 10px 45px rgba(2, 3, 3, 0.38)" }
+    ],
+    "motion": {
+      "status": "locked and unchanged during the Block Aperture and desktop-composition refinement",
+      "desktop": { "maxYawDegrees": 2.65, "maxPitchDegrees": 1.9, "dampingLambda": 5.5, "floatScale": 1 },
+      "tablet": { "maxYawDegrees": 1.82, "maxPitchDegrees": 1.35, "dampingLambda": 5.8, "floatScale": 0.78 },
+      "mobile": { "maxYawDegrees": 0, "maxPitchDegrees": 0, "dampingLambda": 6.4, "floatScale": 0.42 },
+      "architecture": "one inverse rotation-only camera rig; no camera translation and no per-token pointer response",
+      "lockedFileSha256": {
+        "src/scene/motion.js": "3d96925c23aa826c7f6738069922f519ed585245bb921d2b8837f0df8f8adf17",
+        "src/scene/tokenLayout.js": "7bae79eb1042b5e4daa5a29ac857f850675d23b6d0c0fce5f91301e9bf5e62ba"
+      }
+    },
+    "breakpoints": [
+      { "name": "mobile-max", "value": "767px" },
+      { "name": "tablet-max", "value": "1099px" },
+      { "name": "desktop-min", "value": "1100px" }
+    ],
+    "artwork": {
+      "source": "Nine supplied local 512x512 WebPs; no NFT API, IPFS gateway, external artwork host, recoloring, tint, or color grading.",
+      "totalBytes": 76014,
+      "mapping": [
+        { "slot": 1, "label": "Pixel Toad", "file": "/nfts/01-pixel-toad.webp" },
+        { "slot": 2, "label": "Pixel Owl", "file": "/nfts/02-pixel-owl.webp" },
+        { "slot": 3, "label": "Blockhead", "file": "/nfts/03-blockhead.webp" },
+        { "slot": 4, "label": "Green Goblin", "file": "/nfts/04-green-goblin.webp" },
+        { "slot": 5, "label": "Neon Runner", "file": "/nfts/05-neon-runner.webp" },
+        { "slot": 6, "label": "Sketch Avatar", "file": "/nfts/06-sketch-avatar.webp" },
+        { "slot": 7, "label": "Red Hood", "file": "/nfts/07-red-hood.webp" },
+        { "slot": 8, "label": "Bitmap", "file": "/nfts/08-bitmap.webp" },
+        { "slot": 9, "label": "Space Penguin", "file": "/nfts/09-space-penguin.webp" }
+      ],
+      "textureHandling": "sRGB; flipY false; mipmaps; anisotropy capped at 8; deterministic CanvasTexture only as load-failure fallback"
+    },
+    "sceneMaterials": {
+      "front": "unchanged: white tint; local artwork map and emissiveMap; metalness 0; roughness 0.78; emissive near 0.14, mid 0.16, far 0.18",
+      "body": "unchanged: metalness 0.68; roughness 0.44; colors #071015/#050B0F/#030609",
+      "rim": "metalness 0.66; roughness 0.42; colors #035352/#024241/#023534; emissive colors #035352/#024241/#024241; intensities 0.065/0.05/0.04",
+      "back": "unchanged: metalness 0.64; roughness 0.50; colors #03070A/#020507/#010304",
+      "floor": "#070A09; metalness 0.08; roughness 0.94; opacity desktop/tablet 0.18, mobile 0.12",
+      "grid": "#035352 major, #024241 minor; opacity desktop 0.08, tablet 0.06, mobile 0.045"
+    },
+    "lighting": [
+      { "name": "hemisphere", "color": "#9AA39E", "ground": "#020302", "intensity": 0.44 },
+      { "name": "key", "color": "#F0F2ED", "intensity": 3.45 },
+      { "name": "rim", "color": "#035352", "intensity": 5.1 },
+      { "name": "fill", "color": "#59615D", "intensity": 3.0 },
+      { "name": "edge", "color": "#4F6C65", "intensity": 1.55 }
+    ],
+    "responsiveComposition": {
+      "desktopVisibleTokens": 9,
+      "desktopPositionsAndScales": "unchanged from the approved tokenLayout.js configuration",
+      "mobileVisibleSlots": [1, 2, 3, 4, 6, 9],
+      "mobileHiddenSlots": [5, 7, 8],
+      "mobilePositionsAndScales": "unchanged from the approved tokenLayout.js configuration"
+    },
+    "sceneTuning": [
+      { "file": "src/styles.css", "owns": "BlockScan palette, hero copy hierarchy, semantic-layer spacing, search/nav states, atmosphere, CSS breakpoints, and accessibility preferences." },
+      { "file": "src/scene/createScene.js", "owns": "Renderer, #05070A background and fog, light colors, floor/grid colors and opacities; motion loop and camera values remain untouched." },
+      { "file": "src/scene/createToken.js", "owns": "Graphite body/back and restrained Authentic Teal rim colors and emission; front artwork materials remain untouched." },
+      { "file": "src/scene/tokenLayout.js", "owns": "Locked token positions, scales, rotations, drift, and responsive visibility." },
+      { "file": "src/scene/motion.js", "owns": "Locked pointer and autonomous motion behavior." }
+    ],
+    "reviewEvidence": {
+      "desktop": { "file": "../../.impeccable/review/block-aperture-desktop-final.jpg", "width": 1440, "height": 900, "visibleTokens": 9 },
+      "mobile": { "file": "../../.impeccable/review/block-aperture-mobile-final.jpg", "width": 390, "height": 844, "visibleTokens": 6 },
+      "responsiveChecks": { "widths": [1100, 1099, 768, 390], "horizontalOverflow": false },
+      "motionRegression": "locked motion and token-layout SHA-256 values match the approved files",
+      "contrast": { "primaryOnBackground": 18.51, "secondaryOnBackground": 6.96, "secondaryOnSurface": 6.65, "button": 16.40, "focusTealUiEdgeOnBackground": 3.41 },
+      "build": "npm run build passed; existing Three.js chunk-size advisory remains"
+    }
+  },
+  "components": [
+    {
+      "name": "Block Aperture Identity",
+      "kind": "custom",
+      "description": "Reusable /blockscan-aperture.svg mark at 44px desktop and 40px mobile, paired with compact Sepolia and Testnet context while preserving the accessible BlockScan name."
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Home, Accounts, NFTs, Watchlist. Neutral default borders and text; Authentic Teal identifies hover, active, and focus states."
+    },
+    {
+      "name": "Explorer Search",
+      "kind": "form",
+      "description": "700x58 desktop surface with neutral resting border, #08706D focus border, soft teal focus ring, a 102x48 Sidecar Yellow action, and a persistent accepted-format line."
+    }
+  ],
+  "narrative": {
+    "northStar": "Midnight blockchain infrastructure with teal identity and warm signal accents",
+    "overview": "BlockScan is a quiet spatial explorer: a near-black environment, compact technical header, concise search hierarchy, Authentic Teal structure, Sidecar Yellow action, and unchanged colorful NFT artwork.",
+    "keyCharacteristics": [
+      "Black and charcoal visually dominate.",
+      "Authentic Teal identifies structure and environment.",
+      "Sidecar Yellow is reserved for the primary action.",
+      "The central hero contains one headline, one supporting sentence, search, and one accepted-format or status line.",
+      "Nine approved NFT tokens remain on desktop and six on mobile.",
+      "The approved motion system and token composition are locked."
+    ],
+    "rules": [
+      { "name": "Teal Structure, Yellow Signal", "body": "Use Authentic Teal for environmental identity and Sidecar Yellow for high-value interaction." },
+      { "name": "Protected Center", "body": "Do not add copy or decoration that competes with the concise recognition, scope, and search sequence." },
+      { "name": "Artwork Independence", "body": "Never tint, recolor, hue-rotate, or desaturate the supplied NFT artwork." },
+      { "name": "Locked Motion", "body": "Do not modify pointer normalization, camera settings, token motion, depth, positions, scales, or render-loop behavior during brand refinements." }
+    ],
+    "dos": [
+      "Preserve the 85/10/5 charcoal, teal, and yellow balance.",
+      "Keep the concise hero copy and neutral default search surface.",
+      "Verify desktop and mobile together after UI changes."
+    ],
+    "donts": [
+      "Do not restore generic cyan or bright-blue brand accents.",
+      "Do not add yellow lighting, yellow grids, or yellow token rims.",
+      "Do not integrate this standalone prototype into production without separate approval."
+    ]
+  }
+}
