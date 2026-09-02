@@ -647,10 +647,94 @@
 
 .state-panel,
 .loading-state { border: 1px solid var(--line); border-radius: var(--radius-panel); background: var(--surface); }
-.state-panel { display: flex; min-height: 148px; align-items: center; justify-content: space-between; gap: 28px; padding: 27px; }
-.state-panel--error { border-color: rgba(255, 143, 134, 0.3); background: var(--danger-soft); }
+.state-panel {
+  position: relative;
+  display: grid;
+  min-height: 148px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  overflow: hidden;
+  padding: 27px;
+}
+.state-panel::before {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22px 22px, rgba(243, 246, 242, 0.06), transparent 24px),
+    linear-gradient(135deg, rgba(243, 246, 242, 0.035), transparent 44%);
+  content: '';
+  pointer-events: none;
+}
+.state-panel--error {
+  border-color: rgba(168, 191, 180, 0.22);
+  background: linear-gradient(135deg, rgba(14, 20, 18, 0.96), rgba(18, 15, 15, 0.92));
+}
+.state-panel--error::before {
+  background:
+    radial-gradient(circle at 32px 32px, rgba(255, 143, 134, 0.12), transparent 54px),
+    linear-gradient(135deg, rgba(255, 143, 134, 0.06), transparent 42%);
+}
+.state-panel__mark {
+  position: relative;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  align-self: start;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface-elevated);
+}
+.state-panel__mark span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(15, 121, 133, 0.13);
+}
+.state-panel--error .state-panel__mark {
+  border-color: rgba(255, 143, 134, 0.24);
+  background: rgba(24, 16, 17, 0.92);
+}
+.state-panel--error .state-panel__mark span {
+  background: #ff8f86;
+  box-shadow: 0 0 0 5px rgba(255, 143, 134, 0.12);
+}
+.state-panel__content,
+.state-panel__action,
+.state-panel__mark { z-index: 1; }
+.state-panel__content { min-width: 0; }
 .state-panel h2 { margin: 0; font-size: 19px; font-weight: 650; }
-.state-panel p { max-width: 64ch; margin: 8px 0 0; color: var(--text-secondary); line-height: 1.55; }
+.state-panel p { max-width: 62ch; margin: 8px 0 0; color: var(--text-secondary); line-height: 1.55; }
+.state-panel__detail {
+  max-width: min(100%, 760px);
+  margin-top: 14px;
+  color: var(--text-tertiary);
+  font-size: 11px;
+}
+.state-panel__detail summary {
+  width: max-content;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-weight: 650;
+}
+.state-panel__detail code {
+  display: block;
+  max-height: 120px;
+  overflow: auto;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(6, 9, 8, 0.52);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 .state-panel__action,
 .secondary-action,
 .watchlist-item__link,
@@ -974,8 +1058,10 @@
   .nft-form-card { grid-template-columns: 1fr; gap: 28px; padding: 24px 0; }
   .lookup-form { grid-template-columns: 1fr; }
   .identity-bar,
-  .state-panel,
   .watchlist-item { align-items: stretch; flex-direction: column; }
+  .state-panel { grid-template-columns: 1fr; align-items: stretch; gap: 16px; }
+  .state-panel__mark { align-self: auto; }
+  .state-panel__action { width: 100%; }
   .secondary-action { width: 100%; }
   .nft-metadata-list { grid-template-columns: 1fr; }
   .watchlist-item__actions { width: 100%; }

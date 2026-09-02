@@ -13,7 +13,7 @@ function NftPage() {
     tokenId: '',
   });
 
-  const { nft, loading, error } = useNftMetadata(
+  const { nft, loading, error, errorDetail } = useNftMetadata(
     searchValues.contractAddress,
     searchValues.tokenId
   );
@@ -36,7 +36,14 @@ function NftPage() {
         <NftLookupForm onSubmit={handleLookup} />
         <div className="nft-workspace__result" aria-live="polite">
           {loading ? <LoadingState rows={4} label="Loading NFT metadata" /> : null}
-          {error ? <StatePanel title="NFT could not be loaded" message={error} tone="error" /> : null}
+          {error ? (
+            <StatePanel
+              title="NFT could not be loaded"
+              message={error}
+              tone="error"
+              detail={errorDetail}
+            />
+          ) : null}
           {!loading && !error && nft ? <NftMetadataCard nft={nft} /> : null}
           {!loading && !error && !nft && !searchValues.contractAddress ? (
             <StatePanel title="Ready for a token" message="Enter a contract address and token ID to inspect its metadata." />

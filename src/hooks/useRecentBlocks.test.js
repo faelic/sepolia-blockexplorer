@@ -1,4 +1,17 @@
-import { mergeRecentBlocks } from './useRecentBlocks';
+import { act, renderHook, waitFor } from '@testing-library/react';
+
+import {
+  getBlockSummaries,
+  getLatestBlockNumber,
+  getRecentBlocks,
+} from '../services/blockService';
+import useRecentBlocks, { mergeRecentBlocks } from './useRecentBlocks';
+
+jest.mock('../services/blockService', () => ({
+  getBlockSummaries: jest.fn(),
+  getLatestBlockNumber: jest.fn(),
+  getRecentBlocks: jest.fn(),
+}));
 
 function block(number) {
   return { number };
@@ -30,5 +43,45 @@ describe('mergeRecentBlocks', () => {
       mergeRecentBlocks([block(3), block(2)], [block(5), block(4)], 3)
         .map(({ number }) => number),
     ).toEqual([5, 4, 3]);
+  });
+});
+
+describe('useRecentBlocks', () => {
+  beforeEach(() => {
+    getBlockSummaries.mockReset();
+    getLatestBlockNumber.mockReset();
+    getRecentBlocks.mockReset();
+  });
+
+  test('keeps provider errors out of the user-facing feed message', async () => {
+    getRecentBlocks.mockRejectedValue(
+      new Error('missing response (requestBody="{\\"method\\":\\"eth_blockNumber\\"}")'),
+    );
+
+    const { result } = renderHook(() => useRecentBlocks());
+
+    await waitFor(() => expect(result.current.loading).toBe(false));
+
+    expect(result.current.error).toBe(
+      'Live Sepolia activity is temporarily paused. Check your connection, then retry the feed.',
+    );
+    expect(result.current.error).not.toMatch(/eth_blockNumber|requestBody|alchemy/i);
+    expect(result.current.errorDetail).toMatch(/eth_blockNumber/);
+  });
+
+  test('retries the live feed after an initial network failure', async () => {
+    getRecentBlocks
+      .mockRejectedValueOnce(new Error('Network unavailable.'))
+      .mockResolvedValueOnce({ latestBlockNumber: 12, blocks: [block(12)] });
+
+    const { result } = renderHook(() => useRecentBlocks());
+
+    await waitFor(() => expect(result.current.error).toMatch(/temporarily paused/i));
+
+    act(() => result.current.retry());
+
+    await waitFor(() => expect(result.current.blocks).toEqual([block(12)]));
+    expect(result.current.error).toBe('');
+    expect(getRecentBlocks).toHaveBeenCalledTimes(2);
   });
 });

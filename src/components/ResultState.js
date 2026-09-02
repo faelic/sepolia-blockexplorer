@@ -4,7 +4,7 @@ function requestSearchFocus() {
   window.dispatchEvent(new CustomEvent('blockscan:focus-explorer-search'));
 }
 
-function ResultState({ kind, type, onRetry }) {
+function ResultState({ kind, type, onRetry, detail }) {
   const typeName = type.toLowerCase();
 
   if (kind === 'not-found') {
@@ -24,9 +24,9 @@ function ResultState({ kind, type, onRetry }) {
       message="Your search is preserved. Check the connection and retry the current result."
       tone="error"
       action={{ label: 'Retry', onClick: onRetry }}
+      detail={detail}
     />
   );
 }
 
 export default ResultState;
-

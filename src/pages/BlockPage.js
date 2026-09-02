@@ -18,6 +18,7 @@ function BlockPage() {
     block,
     loading,
     error,
+    errorDetail,
     errorType,
     retry,
   } = useBlockDetails(blockId);
@@ -68,7 +69,7 @@ function BlockPage() {
       <ResultContent identity={blockId} state={resultState}>
         {loading ? <ResultSkeleton rows={4} label="Loading block details" /> : null}
         {error ? (
-          <ResultState kind={errorType} type="Block" onRetry={retry} />
+          <ResultState kind={errorType} type="Block" onRetry={retry} detail={errorDetail} />
         ) : null}
 
         {!loading && !error && block ? (

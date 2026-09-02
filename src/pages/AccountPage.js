@@ -33,6 +33,7 @@ function AccountPage() {
     transactionCount,
     loading: accountLoading,
     error: accountError,
+    errorDetail: accountErrorDetail,
     errorType: accountErrorType,
     retry: retryAccount,
   } = useAccountDetails(address);
@@ -41,6 +42,7 @@ function AccountPage() {
     transfers,
     loading: transfersLoading,
     error: transfersError,
+    errorDetail: transfersErrorDetail,
     retry: retryTransfers,
   } = useAddressTransfers(address);
 
@@ -103,7 +105,12 @@ function AccountPage() {
           ) : null}
 
           {accountError ? (
-            <ResultState kind={accountErrorType} type="Address" onRetry={retryAccount} />
+            <ResultState
+              kind={accountErrorType}
+              type="Address"
+              onRetry={retryAccount}
+              detail={accountErrorDetail}
+            />
           ) : null}
 
           {!accountLoading && !accountError ? (
@@ -142,9 +149,10 @@ function AccountPage() {
               {transfersError ? (
                 <StatePanel
                   title="Transfers could not be loaded"
-                  message="The address summary is available, but incoming transfers could not be loaded."
+                  message={transfersError}
                   tone="error"
                   action={{ label: 'Retry transfers', onClick: retryTransfers }}
+                  detail={transfersErrorDetail}
                 />
               ) : null}
 

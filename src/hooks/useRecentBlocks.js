@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   getBlockSummaries,
   getLatestBlockNumber,
   getRecentBlocks,
 } from '../services/blockService';
+import {
+  NETWORK_ACTIVITY_ERROR_MESSAGE,
+  getErrorDetail,
+} from '../lib/errorMessages';
 
 const POLL_INTERVAL = 12000;
 const BLOCK_LIMIT = 6;
@@ -27,6 +31,8 @@ function useRecentBlocks() {
   const [blocks, setBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [errorDetail, setErrorDetail] = useState('');
+  const [attempt, setAttempt] = useState(0);
   const latestBlockRef = useRef(null);
 
   useEffect(() => {
@@ -51,10 +57,12 @@ function useRecentBlocks() {
         latestBlockRef.current = data.latestBlockNumber;
         setLatestBlockNumber(data.latestBlockNumber);
         setBlocks(data.blocks);
+        setErrorDetail('');
       } catch (err) {
         if (!active) return;
 
-        setError(err.message || 'Failed to load recent blocks.');
+        setError(NETWORK_ACTIVITY_ERROR_MESSAGE);
+        setErrorDetail(getErrorDetail(err));
       } finally {
         if (!active) return;
         setLoading(false);
@@ -78,6 +86,7 @@ function useRecentBlocks() {
           setLatestBlockNumber(snapshot.latestBlockNumber);
           setBlocks(snapshot.blocks);
           setError('');
+          setErrorDetail('');
           setLoading(false);
           return;
         }
@@ -102,6 +111,7 @@ function useRecentBlocks() {
         setLatestBlockNumber(nextLatest);
         setBlocks((current) => mergeRecentBlocks(current, unseenBlocks));
         setError('');
+        setErrorDetail('');
       } catch {
         // Preserve the last usable snapshot when a background refresh fails.
       } finally {
@@ -122,13 +132,17 @@ function useRecentBlocks() {
       window.clearTimeout(timerId);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, []);
+  }, [attempt]);
+
+  const retry = useCallback(() => setAttempt((value) => value + 1), []);
 
   return {
     latestBlockNumber,
     blocks,
     loading,
     error,
+    errorDetail,
+    retry,
   };
 }
 

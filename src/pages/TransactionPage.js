@@ -19,6 +19,7 @@ function TransactionPage() {
     receipt,
     loading,
     error,
+    errorDetail,
     errorType,
     retry,
   } = useTransactionDetails(txHash);
@@ -37,7 +38,12 @@ function TransactionPage() {
           <ResultSkeleton lead rows={4} label="Loading transaction details" />
         ) : null}
         {error ? (
-          <ResultState kind={errorType} type="Transaction" onRetry={retry} />
+          <ResultState
+            kind={errorType}
+            type="Transaction"
+            onRetry={retry}
+            detail={errorDetail}
+          />
         ) : null}
 
         {!loading && !error && transaction ? (

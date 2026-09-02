@@ -8,7 +8,7 @@ import useRecentBlocks from '../hooks/useRecentBlocks';
 import formatTimestamp from '../utils/FormatTimestamp';
 
 function HomePage() {
-  const { latestBlockNumber, blocks, loading, error } = useRecentBlocks();
+  const { latestBlockNumber, blocks, loading, error, errorDetail, retry } = useRecentBlocks();
   const transactionCount = blocks.reduce(
     (total, block) => total + (block.transactions?.length || 0),
     0,
@@ -32,6 +32,8 @@ function HomePage() {
             title="Network activity is unavailable"
             message={error}
             tone="error"
+            action={{ label: 'Retry feed', onClick: retry }}
+            detail={errorDetail}
           />
         ) : null}
 
