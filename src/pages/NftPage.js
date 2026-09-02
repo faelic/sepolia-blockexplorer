@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 import NftLookupForm from '../components/NftLookupForm';
 import NftMetadataCard from '../components/NftMetadataCard';
+import LoadingState from '../components/LoadingState';
+import PageIntro from '../components/PageIntro';
+import StatePanel from '../components/StatePanel';
 import useNftMetadata from '../hooks/useNftMetadata';
 
 function NftPage() {
@@ -23,26 +26,26 @@ function NftPage() {
   }
 
   return (
-    <section className="page-section">
-      <div className="page-heading">
-        <p className="page-heading__eyebrow">NFT</p>
-        <h2>NFT metadata lookup</h2>
-        <p>
-          Search for an NFT by contract address and token ID to inspect its
-          metadata.
-        </p>
+    <section className="page-section data-page">
+      <PageIntro
+        title="NFT metadata lookup"
+        description="Inspect ownership metadata, media, and collection details for a Sepolia token."
+      />
+
+      <div className="nft-workspace">
+        <NftLookupForm onSubmit={handleLookup} />
+        <div className="nft-workspace__result" aria-live="polite">
+          {loading ? <LoadingState rows={4} label="Loading NFT metadata" /> : null}
+          {error ? <StatePanel title="NFT could not be loaded" message={error} tone="error" /> : null}
+          {!loading && !error && nft ? <NftMetadataCard nft={nft} /> : null}
+          {!loading && !error && !nft && !searchValues.contractAddress ? (
+            <StatePanel title="Ready for a token" message="Enter a contract address and token ID to inspect its metadata." />
+          ) : null}
+          {!loading && !error && !nft && searchValues.contractAddress && searchValues.tokenId ? (
+            <StatePanel title="No metadata found" message="Check the contract address and token ID, then try again." />
+          ) : null}
+        </div>
       </div>
-
-      <NftLookupForm onSubmit={handleLookup} />
-
-      {loading ? <p className="page-message">Loading NFT metadata...</p> : null}
-
-      {error ? <p className="page-message page-message--error">{error}</p> : null}
-
-      {!loading && !error && nft ? <NftMetadataCard nft={nft} /> : null}
-      {!loading && !error && !nft && searchValues.contractAddress && searchValues.tokenId ? (
-        <p className="page-message">No NFT metadata found for that lookup.</p>
-      ) : null}
     </section>
   );
 }

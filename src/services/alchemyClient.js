@@ -1,8 +1,10 @@
-import { Alchemy, Network } from 'alchemy-sdk';
+import { Alchemy } from 'alchemy-sdk';
+
+const apiKey = process.env.REACT_APP_ALCHEMY_API_KEY;
 
 const settings = {
-  apiKey: process.env.REACT_APP_ALCHEMY_API_KEY,
-  network: Network.ETH_SEPOLIA,
+  apiKey,
+  url: apiKey ? `https://eth-sepolia.g.alchemy.com/v2/${apiKey}` : undefined,
 };
 
 const alchemy = new Alchemy(settings);

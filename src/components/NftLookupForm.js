@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import AnimatedAction from './AnimatedAction';
+import { SearchIcon } from './icons';
+
 function NftLookupForm({ onSubmit }) {
   const [contractAddress, setContractAddress] = useState('');
   const [tokenId, setTokenId] = useState('');
@@ -28,9 +31,8 @@ function NftLookupForm({ onSubmit }) {
   return (
     <section className="nft-form-card">
       <div className="nft-form-card__header">
-        <p className="nft-form-card__eyebrow">NFT Lookup</p>
         <h2>Find NFT metadata</h2>
-        <p>Enter a contract address and token ID to fetch metadata.</p>
+        <p>Use the collection contract and exact token ID.</p>
       </div>
 
       <form className="nft-form" onSubmit={handleSubmit}>
@@ -41,9 +43,16 @@ function NftLookupForm({ onSubmit }) {
           id="contract-address"
           className="nft-form__input"
           type="text"
+          autoComplete="off"
+          spellCheck="false"
           value={contractAddress}
-          onChange={(event) => setContractAddress(event.target.value)}
-          placeholder="0x..."
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'nft-lookup-error' : undefined}
+          onChange={(event) => {
+            setContractAddress(event.target.value);
+            if (error) setError('');
+          }}
+          placeholder="0x1234…"
         />
 
         <label className="nft-form__label" htmlFor="token-id">
@@ -53,16 +62,28 @@ function NftLookupForm({ onSubmit }) {
           id="token-id"
           className="nft-form__input"
           type="text"
+          inputMode="numeric"
+          autoComplete="off"
           value={tokenId}
-          onChange={(event) => setTokenId(event.target.value)}
-          placeholder="e.g. 1"
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'nft-lookup-error' : undefined}
+          onChange={(event) => {
+            setTokenId(event.target.value);
+            if (error) setError('');
+          }}
+          placeholder="1"
         />
 
-        <button className="nft-form__button" type="submit">
+        <AnimatedAction
+          className="nft-form__button"
+          type="submit"
+          icon={SearchIcon}
+          iconSize={16}
+        >
           Fetch Metadata
-        </button>
+        </AnimatedAction>
 
-        {error ? <p className="nft-form__error">{error}</p> : null}
+        {error ? <p className="nft-form__error" id="nft-lookup-error" role="alert">{error}</p> : null}
       </form>
     </section>
   );

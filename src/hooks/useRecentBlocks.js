@@ -1,15 +1,43 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { getRecentBlocks } from '../services/blockService';
+import {
+  getBlockSummaries,
+  getLatestBlockNumber,
+  getRecentBlocks,
+} from '../services/blockService';
+
+const POLL_INTERVAL = 12000;
+const BLOCK_LIMIT = 6;
+
+export function mergeRecentBlocks(current, incoming, limit = BLOCK_LIMIT) {
+  const seen = new Set();
+
+  return [...incoming, ...current]
+    .filter((block) => {
+      if (!block || seen.has(block.number)) return false;
+      seen.add(block.number);
+      return true;
+    })
+    .sort((a, b) => b.number - a.number)
+    .slice(0, limit);
+}
 
 function useRecentBlocks() {
   const [latestBlockNumber, setLatestBlockNumber] = useState(null);
   const [blocks, setBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const latestBlockRef = useRef(null);
 
   useEffect(() => {
-    let isMounted = true;
+    let active = true;
+    let timerId = 0;
+    let requestInFlight = false;
+
+    function scheduleNextPoll(delay = POLL_INTERVAL) {
+      window.clearTimeout(timerId);
+      if (active) timerId = window.setTimeout(checkForNewBlocks, delay);
+    }
 
     async function loadRecentBlocks() {
       try {
@@ -18,29 +46,81 @@ function useRecentBlocks() {
 
         const data = await getRecentBlocks();
 
-        if (!isMounted) {
-          return;
-        }
+        if (!active) return;
 
+        latestBlockRef.current = data.latestBlockNumber;
         setLatestBlockNumber(data.latestBlockNumber);
         setBlocks(data.blocks);
       } catch (err) {
-        if (!isMounted) {
-          return;
-        }
+        if (!active) return;
 
         setError(err.message || 'Failed to load recent blocks.');
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        if (!active) return;
+        setLoading(false);
+        scheduleNextPoll();
       }
     }
 
+    async function checkForNewBlocks() {
+      if (!active || requestInFlight) return;
+      if (document.hidden) {
+        scheduleNextPoll();
+        return;
+      }
+
+      requestInFlight = true;
+      try {
+        if (latestBlockRef.current === null) {
+          const snapshot = await getRecentBlocks(BLOCK_LIMIT);
+          if (!active) return;
+          latestBlockRef.current = snapshot.latestBlockNumber;
+          setLatestBlockNumber(snapshot.latestBlockNumber);
+          setBlocks(snapshot.blocks);
+          setError('');
+          setLoading(false);
+          return;
+        }
+
+        const nextLatest = await getLatestBlockNumber();
+        if (!active || nextLatest <= latestBlockRef.current) {
+          return;
+        }
+
+        const firstNewBlock = Math.max(
+          latestBlockRef.current + 1,
+          nextLatest - BLOCK_LIMIT + 1,
+        );
+        const unseenNumbers = Array.from(
+          { length: nextLatest - firstNewBlock + 1 },
+          (_, index) => nextLatest - index,
+        );
+        const unseenBlocks = await getBlockSummaries(unseenNumbers);
+        if (!active) return;
+
+        latestBlockRef.current = nextLatest;
+        setLatestBlockNumber(nextLatest);
+        setBlocks((current) => mergeRecentBlocks(current, unseenBlocks));
+        setError('');
+      } catch {
+        // Preserve the last usable snapshot when a background refresh fails.
+      } finally {
+        requestInFlight = false;
+        scheduleNextPoll();
+      }
+    }
+
+    function handleVisibilityChange() {
+      if (!document.hidden) scheduleNextPoll(0);
+    }
+
     loadRecentBlocks();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      isMounted = false;
+      active = false;
+      window.clearTimeout(timerId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 

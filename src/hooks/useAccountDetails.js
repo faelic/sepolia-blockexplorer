@@ -1,12 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { getAccountDetails } from '../services/accountService';
 
 function useAccountDetails(address) {
-  const [balance, setBalance] = useState(null);
-  const [transactionCount, setTransactionCount] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [attempt, setAttempt] = useState(0);
+  const [request, setRequest] = useState({
+    key: null,
+    balance: null,
+    transactionCount: null,
+    status: 'idle',
+    error: '',
+  });
 
   useEffect(() => {
     if (!address) {
@@ -17,8 +21,13 @@ function useAccountDetails(address) {
 
     async function loadAccountDetails() {
       try {
-        setLoading(true);
-        setError('');
+        setRequest({
+          key: address,
+          balance: null,
+          transactionCount: null,
+          status: 'loading',
+          error: '',
+        });
 
         const data = await getAccountDetails(address);
 
@@ -26,18 +35,25 @@ function useAccountDetails(address) {
           return;
         }
 
-        setBalance(data.balance);
-        setTransactionCount(data.transactionCount);
+        setRequest({
+          key: address,
+          balance: data.balance,
+          transactionCount: data.transactionCount,
+          status: 'success',
+          error: '',
+        });
       } catch (err) {
         if (!isMounted) {
           return;
         }
 
-        setError(err.message || 'Failed to load account details.');
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setRequest({
+          key: address,
+          balance: null,
+          transactionCount: null,
+          status: 'error',
+          error: err.message || 'Failed to load account details.',
+        });
       }
     }
 
@@ -46,13 +62,18 @@ function useAccountDetails(address) {
     return () => {
       isMounted = false;
     };
-  }, [address]);
+  }, [address, attempt]);
+
+  const retry = useCallback(() => setAttempt((value) => value + 1), []);
+  const isCurrentRequest = request.key === address;
 
   return {
-    balance,
-    transactionCount,
-    loading,
-    error,
+    balance: isCurrentRequest ? request.balance : null,
+    transactionCount: isCurrentRequest ? request.transactionCount : null,
+    loading: Boolean(address) && (!isCurrentRequest || request.status === 'loading'),
+    error: isCurrentRequest ? request.error : '',
+    errorType: isCurrentRequest && request.error ? 'network' : '',
+    retry,
   };
 }
 

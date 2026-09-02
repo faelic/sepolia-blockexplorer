@@ -1,15 +1,23 @@
 import alchemy from './alchemyClient';
 
+export async function getLatestBlockNumber() {
+  return alchemy.core.getBlockNumber();
+}
+
+export async function getBlockSummaries(blockNumbers) {
+  return Promise.all(
+    blockNumbers.map((blockNumber) => alchemy.core.getBlock(blockNumber)),
+  );
+}
+
 export async function getRecentBlocks(count = 6) {
-  const latestBlockNumber = await alchemy.core.getBlockNumber();
+  const latestBlockNumber = await getLatestBlockNumber();
 
   const blockNumbers = Array.from({ length: count }, (_, index) => {
     return latestBlockNumber - index;
   }).filter((blockNumber) => blockNumber >= 0);
 
-  const blocks = await Promise.all(
-    blockNumbers.map((blockNumber) => alchemy.core.getBlock(blockNumber))
-  );
+  const blocks = await getBlockSummaries(blockNumbers);
 
   return {
     latestBlockNumber,
@@ -26,10 +34,10 @@ export async function getBlockDetails(blockId) {
   const block = await alchemy.core.getBlockWithTransactions(parsedBlockId);
 
   if (!block) {
-    throw new Error('Block not found.');
+    const error = new Error('Block not found.');
+    error.code = 'NOT_FOUND';
+    throw error;
   }
 
   return block;
 }
-
-

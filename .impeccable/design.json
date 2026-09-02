@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T16:54:18Z",
+  "title": "Design System: BlockScan",
+  "extensions": {
+    "colorMeta": {
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#05070a",
+        "tonalRamp": ["#05070a", "#111419", "#24272c", "#3e4248", "#62676d", "#8c9197", "#c3c7cb", "#f2f4f5"]
+      },
+      "observatory-surface": {
+        "role": "neutral",
+        "displayName": "Observatory Surface",
+        "canonical": "#0b0f0f",
+        "tonalRamp": ["#080b0b", "#151b1a", "#29312f", "#46514e", "#687570", "#929d99", "#c4cbc8", "#f1f4f2"]
+      },
+      "elevated-surface": {
+        "role": "neutral",
+        "displayName": "Elevated Surface",
+        "canonical": "#111514",
+        "tonalRamp": ["#0c0f0e", "#1b211f", "#303936", "#4c5753", "#6e7a75", "#969f9b", "#c6cdca", "#f2f4f3"]
+      },
+      "primary-text": {
+        "role": "neutral",
+        "displayName": "Primary Text",
+        "canonical": "#f3f6f2",
+        "tonalRamp": ["#171a17", "#303530", "#505750", "#737c73", "#99a299", "#bdc5bd", "#dce2dc", "#f3f6f2"]
+      },
+      "supporting-copy": {
+        "role": "neutral",
+        "displayName": "Supporting Copy",
+        "canonical": "#d4d9d5",
+        "tonalRamp": ["#171a18", "#303431", "#505551", "#747a75", "#989e99", "#bbc1bc", "#d4d9d5", "#f4f6f4"]
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Secondary Text",
+        "canonical": "#909a95",
+        "tonalRamp": ["#151a17", "#2a332e", "#414c46", "#5d6963", "#77847e", "#909a95", "#c0c8c4", "#f1f4f2"]
+      },
+      "tertiary-text": {
+        "role": "neutral",
+        "displayName": "Tertiary Text",
+        "canonical": "#707a75",
+        "tonalRamp": ["#121714", "#27302b", "#3c4842", "#56635d", "#707a75", "#969f9a", "#c3cac6", "#f1f3f2"]
+      },
+      "placeholder-text": {
+        "role": "neutral",
+        "displayName": "Placeholder Text",
+        "canonical": "#a1aaa6",
+        "tonalRamp": ["#161a18", "#2e3431", "#48504c", "#656e69", "#818a85", "#a1aaa6", "#cbd1ce", "#f3f5f4"]
+      },
+      "authentic-teal": {
+        "role": "primary",
+        "displayName": "Authentic Teal",
+        "canonical": "#035352",
+        "tonalRamp": ["#002221", "#013a39", "#035352", "#08706d", "#2b918b", "#63b5ae", "#a4d7d2", "#e3f5f3"]
+      },
+      "interactive-teal": {
+        "role": "primary",
+        "displayName": "Interactive Teal",
+        "canonical": "#08706d",
+        "tonalRamp": ["#002523", "#03423f", "#08706d", "#15908b", "#35aaa3", "#6bc5bf", "#a9dfda", "#e6f7f5"]
+      },
+      "deep-teal": {
+        "role": "primary",
+        "displayName": "Deep Teal",
+        "canonical": "#024241",
+        "tonalRamp": ["#001c1b", "#02302f", "#024241", "#09635f", "#26847e", "#5baba5", "#9bd1cd", "#e1f3f1"]
+      },
+      "sidecar-yellow": {
+        "role": "secondary",
+        "displayName": "Sidecar Yellow",
+        "canonical": "#f3e8bc",
+        "tonalRamp": ["#2f2915", "#554b25", "#7e713b", "#a99a5d", "#cbbd82", "#e4d8a5", "#f3e8bc", "#fff9e6"]
+      },
+      "sidecar-yellow-hover": {
+        "role": "secondary",
+        "displayName": "Sidecar Yellow Hover",
+        "canonical": "#fff1c8",
+        "tonalRamp": ["#302916", "#584c28", "#81713e", "#ad9860", "#d1bc85", "#ead9a9", "#fff1c8", "#fffae9"]
+      },
+      "status-success": {
+        "role": "tertiary",
+        "displayName": "Status Success",
+        "canonical": "#78d2a8",
+        "tonalRamp": ["#09261b", "#10412e", "#1c5f43", "#2c805a", "#48a476", "#78d2a8", "#afe8ce", "#e9faf2"]
+      },
+      "status-amber": {
+        "role": "tertiary",
+        "displayName": "Status Amber",
+        "canonical": "#d9b36b",
+        "tonalRamp": ["#2a200b", "#493713", "#68501f", "#8d6c30", "#b18d4b", "#d9b36b", "#ecd39f", "#fbf2df"]
+      },
+      "status-red": {
+        "role": "tertiary",
+        "displayName": "Status Red",
+        "canonical": "#ff8f86",
+        "tonalRamp": ["#33100e", "#5c1d19", "#842c27", "#ad433c", "#d6635b", "#ff8f86", "#ffbbb5", "#ffecea"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Mosaic Hero Display",
+        "purpose": "The exact centered Home headline only."
+      },
+      "headline": {
+        "displayName": "Operational Headline",
+        "purpose": "Live Network Activity and internal route introductions."
+      },
+      "title": {
+        "displayName": "Instrument Title",
+        "purpose": "Data-section headings and compact state titles."
+      },
+      "body": {
+        "displayName": "Interface Body",
+        "purpose": "Operational explanations and route descriptions."
+      },
+      "hero-support": {
+        "displayName": "Hero Support",
+        "purpose": "The exact one-line explorer capability statement."
+      },
+      "label": {
+        "displayName": "Mosaic Label",
+        "purpose": "Uppercase tile types and compact technical labels."
+      },
+      "mono": {
+        "displayName": "Chain Identifier",
+        "purpose": "Hashes, addresses, block numbers, prices, and query text."
+      },
+      "mosaic-metric": {
+        "displayName": "Mosaic Metric",
+        "purpose": "Captured and revalidated coin prices in the decorative wall."
+      }
+    },
+    "shadows": [
+      {
+        "name": "mosaic-tile-ambient",
+        "value": "0 12px 32px rgba(0, 0, 0, 0.22)",
+        "purpose": "Restrained separation between dark tiles on the receding plane."
+      },
+      {
+        "name": "hero-search-ambient",
+        "value": "0 18px 56px rgba(0, 0, 0, 0.30)",
+        "purpose": "Keeps the functional search clear of the environmental wall."
+      },
+      {
+        "name": "search-focus-ring",
+        "value": "0 0 0 3px rgba(3, 83, 82, 0.18)",
+        "purpose": "Visible structural focus paired with an Interactive Teal border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "search-control",
+        "value": "170ms ease",
+        "purpose": "Search border, background, and focus-ring feedback."
+      },
+      {
+        "name": "data-update",
+        "value": "180ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Quiet opacity and two-pixel settling for real value changes."
+      },
+      {
+        "name": "nft-reveal",
+        "value": "240ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Fine-pointer-only artwork reveal without tilt or bounce."
+      },
+      {
+        "name": "environment-handoff",
+        "value": "CSS Scroll Timeline 70svh–100svh: opacity 1→0.48, translateY 0→-12px, scale 1→0.98",
+        "purpose": "Natural-scroll attenuation before Live Network Activity."
+      },
+      {
+        "name": "content-handoff",
+        "value": "CSS Scroll Timeline 85svh–100svh: opacity 1→0.86, translateY 0→-5px",
+        "purpose": "Late, minimal attenuation of headline and search."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Removes scroll-handoff animations and NFT scaling while preserving search and complete static composition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mosaic-tablet",
+        "value": "1100px"
+      },
+      {
+        "name": "mosaic-mobile",
+        "value": "767px"
+      },
+      {
+        "name": "mosaic-narrow",
+        "value": "360px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sidecar Search Action",
+      "kind": "button",
+      "refersTo": "hero-search-action",
+      "description": "The single warm action in the opening composition.",
+      "html": "<button class=\"ds-mosaic-action\" type=\"button\">Search <svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8h9M8.5 4.5 12 8l-3.5 3.5\"/></svg></button>",
+      "css": ".ds-mosaic-action { display: inline-flex; width: 120px; min-height: 50px; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 11px; padding: 0 19px; background: #f3e8bc; color: var(--canvas); font: 700 16px var(--font-sans); transition: background-color 170ms ease, transform 170ms ease; } .ds-mosaic-action svg { width: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; } .ds-mosaic-action:hover { background: #fff1c8; } .ds-mosaic-action:active { transform: translateY(1px); } .ds-mosaic-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }"
+    },
+    {
+      "name": "Mosaic Explorer Search",
+      "kind": "input",
+      "refersTo": "hero-search-input",
+      "description": "The centered single-line field that remains dominant over the environmental wall.",
+      "html": "<form class=\"ds-mosaic-search\"><label for=\"ds-query\">Search the Sepolia explorer</label><input id=\"ds-query\" placeholder=\"Search block, tx hash, or address\"/><button type=\"button\">Search <svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M3 8h9M8.5 4.5 12 8l-3.5 3.5\"/></svg></button></form>",
+      "css": ".ds-mosaic-search { position: relative; display: flex; width: min(100%, 780px); min-height: 64px; overflow: hidden; border: 1px solid rgba(243,246,242,.25); border-radius: 15px; padding: 6px; background: rgba(11,15,15,.86); box-shadow: 0 18px 56px rgba(0,0,0,.3); backdrop-filter: blur(4px); transition: border-color 170ms ease, background-color 170ms ease, box-shadow 170ms ease; } .ds-mosaic-search:focus-within { border-color: #08706d; background: rgba(17,21,20,.94); box-shadow: 0 0 0 3px rgba(3,83,82,.18), 0 18px 56px rgba(0,0,0,.3); } .ds-mosaic-search label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); } .ds-mosaic-search input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 0 16px; background: transparent; color: #f3f6f2; font: 400 17px var(--font-sans, 'Manrope Variable', sans-serif); } .ds-mosaic-search input::placeholder { color: #a1aaa6; } .ds-mosaic-search button { display: inline-flex; width: 120px; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 11px; background: #f3e8bc; color: #05070a; font: 700 16px var(--font-sans, 'Manrope Variable', sans-serif); } .ds-mosaic-search button:hover { background: #fff1c8; } .ds-mosaic-search button:active { transform: translateY(1px); } .ds-mosaic-search button:focus-visible { outline: 2px solid #08706d; outline-offset: -3px; } .ds-mosaic-search svg { width: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Home Header Navigation",
+      "kind": "nav",
+      "description": "The existing BlockScan navigation kept quiet over the mosaic.",
+      "html": "<nav class=\"ds-mosaic-nav\"><strong>BlockScan</strong><span><a class=\"is-active\" href=\"#\">Home</a><a href=\"#\">Accounts</a><a href=\"#\">NFTs</a><a href=\"#\">Watchlist</a></span><code>Sepolia testnet</code></nav>",
+      "css": ".ds-mosaic-nav { display: flex; min-height: 76px; align-items: center; gap: 24px; border-bottom: 1px solid rgba(144,154,149,.1); padding: 0 32px; background: rgba(5,7,10,.58); color: #f3f6f2; font-family: var(--font-sans, 'Manrope Variable', sans-serif); } .ds-mosaic-nav strong { font-size: 14px; } .ds-mosaic-nav > span { display: flex; align-self: stretch; margin-left: auto; } .ds-mosaic-nav a { position: relative; display: inline-flex; align-items: center; padding: 0 12px; color: #909a95; font-size: 13px; font-weight: 600; text-decoration: none; } .ds-mosaic-nav a:hover, .ds-mosaic-nav a.is-active { color: #f3f6f2; } .ds-mosaic-nav a.is-active::after { position: absolute; right: 12px; bottom: 0; left: 12px; height: 1px; background: #08706d; content: ''; } .ds-mosaic-nav a:focus-visible { outline: 2px solid #08706d; outline-offset: 3px; } .ds-mosaic-nav code { border-left: 1px solid rgba(144,154,149,.16); padding-left: 18px; color: #707a75; font: 500 10px var(--font-mono, 'IBM Plex Mono', monospace); }"
+    },
+    {
+      "name": "Mosaic Plane",
+      "kind": "custom",
+      "description": "The art-directed 17-slot desktop wall with a protected central exclusion zone.",
+      "html": "<div class=\"ds-plane-wrap\"><div class=\"ds-plane\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class=\"is-empty\"></i><i></i><i></i><i></i><i></i><i class=\"is-empty\"></i><i></i><i></i><i></i><i></i><i class=\"is-empty\"></i><i></i><i></i></div><div class=\"ds-plane-veil\"></div></div>",
+      "css": ".ds-plane-wrap { position: relative; min-height: 430px; overflow: hidden; background: #05070a; perspective: 1480px; } .ds-plane { position: absolute; top: 50%; left: 50%; display: grid; width: 112%; min-width: 760px; height: 92%; grid-template-columns: repeat(5,1fr); grid-template-rows: repeat(4,1fr); gap: 12px; transform: translate3d(-50%,-50%,0) rotateX(6deg) rotateZ(-2deg) scale(1.08); transform-style: preserve-3d; } .ds-plane i { border: 1px solid rgba(144,154,149,.18); border-radius: 13px; background: rgba(11,15,15,.9); box-shadow: 0 12px 32px rgba(0,0,0,.22); opacity: .6; } .ds-plane i:nth-child(2), .ds-plane i:nth-child(5), .ds-plane i:nth-child(6), .ds-plane i:nth-child(9), .ds-plane i:nth-child(12), .ds-plane i:nth-child(17) { background: linear-gradient(135deg, #35433c, #0b0f0f 72%); opacity: .72; } .ds-plane i.is-empty { visibility: hidden; } .ds-plane-veil { position: absolute; inset: 0; background: radial-gradient(ellipse 43% 48% at 50% 49%, rgba(5,7,10,.99), rgba(5,7,10,.96) 35%, rgba(5,7,10,.74) 67%, rgba(5,7,10,.18)); pointer-events: none; }"
+    },
+    {
+      "name": "Verified NFT Artwork Tile",
+      "kind": "card",
+      "refersTo": "mosaic-tile",
+      "description": "A subdued, decorative local artwork tile with fine-pointer-only reveal.",
+      "html": "<div class=\"ds-nft-tile\"><img src=\"/hero/nfts/noun-1.webp\" alt=\"\" width=\"320\" height=\"320\"/><span>#1</span></div>",
+      "css": ".ds-nft-tile { position: relative; width: 230px; aspect-ratio: 1; overflow: hidden; border: 1px solid rgba(144,154,149,.18); border-radius: 13px; background: #0b0f0f; box-shadow: 0 12px 32px rgba(0,0,0,.22); opacity: .72; cursor: default; transition: opacity 240ms cubic-bezier(.16,1,.3,1), transform 240ms cubic-bezier(.16,1,.3,1), border-color 240ms ease; } .ds-nft-tile::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,10,.06), rgba(5,7,10,.35)); content: ''; opacity: .62; transition: opacity 240ms cubic-bezier(.16,1,.3,1); } .ds-nft-tile img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.62) saturate(.72); transition: filter 240ms cubic-bezier(.16,1,.3,1), transform 240ms cubic-bezier(.16,1,.3,1); } .ds-nft-tile span { position: absolute; z-index: 2; right: 11px; bottom: 10px; border: 1px solid rgba(243,246,242,.18); border-radius: 7px; padding: 5px 8px; background: rgba(5,7,10,.62); color: rgba(243,246,242,.66); font: 500 9px var(--font-mono, 'IBM Plex Mono', monospace); } @media (hover:hover) and (pointer:fine) { .ds-nft-tile:hover { border-color: rgba(144,154,149,.28); opacity: .94; transform: translateY(-2px) scale(1.015); } .ds-nft-tile:hover::after { opacity: .12; } .ds-nft-tile:hover img { filter: brightness(.98) saturate(.98); transform: scale(1.015); } } .ds-nft-tile:focus-visible { outline: none; } @media (prefers-reduced-motion:reduce) { .ds-nft-tile, .ds-nft-tile::after, .ds-nft-tile img { transition-duration: .01ms; } .ds-nft-tile:hover, .ds-nft-tile:hover img { transform: none; } }"
+    },
+    {
+      "name": "Coin Price Tile",
+      "kind": "card",
+      "refersTo": "mosaic-tile",
+      "description": "A subdued captured/current price card with only a tiny fine-pointer response.",
+      "html": "<div class=\"ds-coin-tile\"><strong><i>E</i> ETH</strong><code>$2,427.91</code><small>-1.66%</small><svg viewBox=\"0 0 190 42\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 30 L32 24 L64 28 L96 18 L128 25 L160 13 L190 17\"/></svg></div>",
+      "css": ".ds-coin-tile { display: grid; width: 250px; min-height: 160px; grid-template-columns: 1fr auto; grid-template-rows: auto auto 1fr; align-content: center; column-gap: 12px; border: 1px solid rgba(144,154,149,.18); border-radius: 13px; padding: 24px; background: rgba(11,15,15,.9); color: rgba(243,246,242,.88); box-shadow: 0 12px 32px rgba(0,0,0,.22); opacity: .6; transition: border-color 170ms ease; } .ds-coin-tile strong { display: flex; align-items: center; gap: 8px; font: 700 10px var(--font-sans, 'Manrope Variable', sans-serif); } .ds-coin-tile strong i { display: grid; width: 18px; height: 18px; place-items: center; border: 1px solid rgba(8,112,109,.46); border-radius: 50%; color: rgba(144,197,192,.88); font: 500 8px var(--font-mono, 'IBM Plex Mono', monospace); } .ds-coin-tile code { grid-column: 1/-1; margin-top: 13px; color: rgba(243,246,242,.9); font: 500 24px var(--font-mono, 'IBM Plex Mono', monospace); letter-spacing: -.05em; } .ds-coin-tile small { align-self: end; color: rgba(200,112,104,.78); font: 500 9px var(--font-mono, 'IBM Plex Mono', monospace); } .ds-coin-tile svg { width: 64%; height: 35px; align-self: end; justify-self: end; opacity: .45; transition: opacity 170ms ease; } .ds-coin-tile path { fill: none; stroke: rgba(8,112,109,.92); stroke-width: 1.15; } @media (hover:hover) and (pointer:fine) { .ds-coin-tile:hover { border-color: rgba(8,112,109,.25); } .ds-coin-tile:hover svg { opacity: .54; } }"
+    },
+    {
+      "name": "Sepolia Chain Tile",
+      "kind": "card",
+      "refersTo": "mosaic-tile",
+      "description": "A static block, transaction, or address slot populated only by captured or shared real data.",
+      "html": "<div class=\"ds-chain-tile\"><small>Block</small><strong>#11,613,754</strong><span>173 transactions</span><i><b></b><b></b><b></b></i></div>",
+      "css": ".ds-chain-tile { position: relative; display: flex; width: 250px; min-height: 160px; flex-direction: column; justify-content: center; gap: 9px; border: 1px solid rgba(144,154,149,.18); border-radius: 13px; padding: 24px; background: rgba(11,15,15,.9); color: rgba(243,246,242,.88); box-shadow: 0 12px 32px rgba(0,0,0,.22); opacity: .6; } .ds-chain-tile small { color: rgba(144,154,149,.74); font: 700 9px var(--font-sans, 'Manrope Variable', sans-serif); letter-spacing: .1em; text-transform: uppercase; } .ds-chain-tile strong { overflow: hidden; color: rgba(243,246,242,.84); font: 500 20px var(--font-mono, 'IBM Plex Mono', monospace); letter-spacing: -.04em; text-overflow: ellipsis; white-space: nowrap; } .ds-chain-tile span { color: rgba(144,154,149,.65); font: 400 10px var(--font-sans, 'Manrope Variable', sans-serif); } .ds-chain-tile > i { position: absolute; right: 20px; bottom: 17px; display: flex; gap: 3px; opacity: .34; transform: rotate(-30deg); } .ds-chain-tile > i b { width: 14px; height: 14px; border: 1px solid rgba(8,112,109,.9); background: rgba(3,83,82,.26); transform: skewY(30deg); }"
+    },
+    {
+      "name": "Centered Hero Stack",
+      "kind": "custom",
+      "description": "The exact fixed copy hierarchy and primary search placement over the exclusion zone.",
+      "html": "<section class=\"ds-hero-stack\"><h1>See Sepolia as it happens.</h1><p>Search blocks, transactions, and addresses instantly.</p><div class=\"ds-hero-stack__search\"><span>Search block, tx hash, or address</span><button>Search</button></div></section>",
+      "css": ".ds-hero-stack { display: grid; width: min(100%,840px); justify-items: center; color: #f3f6f2; text-align: center; font-family: var(--font-sans, 'Manrope Variable', sans-serif); } .ds-hero-stack h1 { max-width: 840px; margin: 0; font-size: clamp(60px,4.45vw,64px); font-weight: 800; letter-spacing: -.04em; line-height: 1.04; } .ds-hero-stack > p { max-width: 620px; margin: 22px 0 28px; color: #d4d9d5; font-size: clamp(18px,1.35vw,20px); line-height: 1.5; } .ds-hero-stack__search { display: flex; width: min(100%,780px); min-height: 64px; align-items: center; overflow: hidden; border: 1px solid rgba(243,246,242,.25); border-radius: 15px; padding-left: 22px; background: rgba(11,15,15,.86); box-shadow: 0 18px 56px rgba(0,0,0,.3); color: #a1aaa6; text-align: left; } .ds-hero-stack__search span { min-width: 0; flex: 1; font-size: 17px; } .ds-hero-stack__search button { width: 120px; min-height: 50px; margin: 6px; border: 0; border-radius: 11px; background: #f3e8bc; color: #05070a; font-size: 16px; font-weight: 700; } .ds-hero-stack__search button:hover { background: #fff1c8; } .ds-hero-stack__search button:focus-visible { outline: 2px solid #08706d; outline-offset: -3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Explorer Mosaic",
+    "overview": "BlockScan opens as a centered precision search surrounded by a subdued wall of real onchain context. The mosaic establishes breadth—verified NFT artwork, captured coin prices, Sepolia blocks, transaction hashes, and addresses—while a dark exclusion zone keeps the headline and search unmistakably dominant. It is theatrical in composition but technical in content.\n\nThe system is static-first, honest, and quiet. Local artwork and a committed real-data snapshot make the first frame complete without waiting for Alchemy; later values update without reshuffling the art direction. Native scrolling hands the mosaic directly into the existing Live Network Activity section. Market Pulse remains absent under the previously approved product redesign, and the preserved Three.js hero is no longer rendered.",
+    "keyCharacteristics": [
+      "A centered headline, concise support line, and single dominant search action.",
+      "A real-data mosaic with fixed positions, a calm central exclusion zone, and intentional edge cropping.",
+      "Seventeen desktop tiles, twelve tablet tiles, and eight mobile tiles rather than one squeezed universal grid.",
+      "Sidecar Yellow reserved for the primary search action; teal remains structural and atmospheric.",
+      "Complete first paint from local WebPs and a committed snapshot, followed by quiet shared-data updates.",
+      "Decorative motion is fine-pointer-only, scroll-native, reduced-motion-safe, and subordinate to search."
+    ],
+    "rules": [
+      {
+        "name": "The One Yellow Action Rule",
+        "body": "Sidecar Yellow belongs to Search in the opening composition; never distribute it across mosaic tiles or passive data.",
+        "section": "colors"
+      },
+      {
+        "name": "The Teal Is Structure Rule",
+        "body": "Teal establishes identity, focus, and geometry at low volume; it does not tint artwork or become a generic neon Web3 glow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Center Speaks Once Rule",
+        "body": "Keep the hero to its exact headline, one support sentence, and search; add no eyebrow, chips, prompts, or second CTA.",
+        "section": "typography"
+      },
+      {
+        "name": "The Data Keeps Its Cadence Rule",
+        "body": "Use IBM Plex Mono and tabular numerals for exact or changing values; keep explanations and navigation in Manrope.",
+        "section": "typography"
+      },
+      {
+        "name": "The Search Owns the Center Rule",
+        "body": "No bright artwork, large price, or interactive tile may enter the central headline-and-search exclusion zone.",
+        "section": "layout"
+      },
+      {
+        "name": "The Density Steps Down Rule",
+        "body": "Curate 17/12/8 tiles across desktop/tablet/mobile; never squeeze the desktop wall into a smaller viewport.",
+        "section": "layout"
+      },
+      {
+        "name": "The Plane Creates Depth Rule",
+        "body": "Treat the mosaic as one receding wall; never replace its calm perspective with per-tile parallax, floating motion, or heavy glass effects.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the exact headline, support sentence, placeholder, and Search label.",
+      "Do keep the complete first frame available from local WebPs and the committed real-data snapshot.",
+      "Do reuse the single Home `useRecentBlocks` feed and the one-shot four-symbol price request.",
+      "Do keep the mosaic decorative, hidden from assistive technology, and visually subordinate to semantic search.",
+      "Do keep the old Three.js source preserved but unrendered while the Explorer Mosaic is the approved Home hero.",
+      "Do hand directly into the unchanged Live Network Activity section through native scrolling."
+    ],
+    "donts": [
+      "Don't restore Market Pulse; it remains absent under the approved redesign.",
+      "Don't fetch NFT artwork at runtime, substitute the six locked selections, or imply collection endorsement.",
+      "Don't invent prices, changes, block numbers, hashes, addresses, or freshness claims.",
+      "Don't add duplicate polling, per-coin requests, loading skeletons, shimmers, spinners, or hero error banners.",
+      "Don't add AI-composer controls, prompt chips, another CTA, wallet connection, or NFT search to the hero field.",
+      "Don't add per-tile parallax, pointer tilt, touch hover simulation, bounce, or scroll motion that survives reduced motion."
+    ]
+  }
+}

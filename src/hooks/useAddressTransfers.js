@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { getAddressTransfers } from '../services/transferService';
 
 function useAddressTransfers(address) {
-  const [transfers, setTransfers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [attempt, setAttempt] = useState(0);
+  const [request, setRequest] = useState({
+    key: null,
+    transfers: [],
+    status: 'idle',
+    error: '',
+  });
 
   useEffect(() => {
     if (!address) {
@@ -16,8 +20,12 @@ function useAddressTransfers(address) {
 
     async function loadTransfers() {
       try {
-        setLoading(true);
-        setError('');
+        setRequest({
+          key: address,
+          transfers: [],
+          status: 'loading',
+          error: '',
+        });
 
         const data = await getAddressTransfers(address);
 
@@ -25,17 +33,23 @@ function useAddressTransfers(address) {
           return;
         }
 
-        setTransfers(data);
+        setRequest({
+          key: address,
+          transfers: data,
+          status: 'success',
+          error: '',
+        });
       } catch (err) {
         if (!isMounted) {
           return;
         }
 
-        setError(err.message || 'Failed to load transfers.');
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setRequest({
+          key: address,
+          transfers: [],
+          status: 'error',
+          error: err.message || 'Failed to load transfers.',
+        });
       }
     }
 
@@ -44,12 +58,16 @@ function useAddressTransfers(address) {
     return () => {
       isMounted = false;
     };
-  }, [address]);
+  }, [address, attempt]);
+
+  const retry = useCallback(() => setAttempt((value) => value + 1), []);
+  const isCurrentRequest = request.key === address;
 
   return {
-    transfers,
-    loading,
-    error,
+    transfers: isCurrentRequest ? request.transfers : [],
+    loading: Boolean(address) && (!isCurrentRequest || request.status === 'loading'),
+    error: isCurrentRequest ? request.error : '',
+    retry,
   };
 }
 

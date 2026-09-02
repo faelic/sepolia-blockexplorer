@@ -2,8 +2,18 @@ import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import AccountLookupForm from '../components/AccountLookupForm';
-import StatCard from '../components/StatCard';
+import AnimatedAction from '../components/AnimatedAction';
+import CopyableValue from '../components/CopyableValue';
+import LoadingState from '../components/LoadingState';
+import MetricStrip from '../components/MetricStrip';
+import PageIntro from '../components/PageIntro';
+import ResultContent from '../components/ResultContent';
+import ResultHeader from '../components/ResultHeader';
+import ResultSkeleton from '../components/ResultSkeleton';
+import ResultState from '../components/ResultState';
+import StatePanel from '../components/StatePanel';
 import TransfersList from '../components/TransferList';
+import { BookmarkPlusIcon } from '../components/icons';
 import useAccountDetails from '../hooks/useAccountDetails';
 import useAddressTransfers from '../hooks/useAddressTransfers';
 import useWatchlist from '../hooks/useWatchList';
@@ -23,19 +33,31 @@ function AccountPage() {
     transactionCount,
     loading: accountLoading,
     error: accountError,
+    errorType: accountErrorType,
+    retry: retryAccount,
   } = useAccountDetails(address);
 
   const {
     transfers,
     loading: transfersLoading,
     error: transfersError,
+    retry: retryTransfers,
   } = useAddressTransfers(address);
 
   const { addToWatchlist } = useWatchlist();
+  const resultState = accountLoading
+    ? 'loading'
+    : accountError
+      ? accountErrorType
+      : 'ready';
 
   function handleLookup(submittedAddress) {
     setWatchlistMessage({ text: '', type: '' });
-    history.push(`/accounts/${submittedAddress}`);
+    history.push(`/accounts/${submittedAddress}`, {
+      explorerQuery: submittedAddress,
+      explorerSearchType: 'address',
+      source: 'account-lookup',
+    });
   }
 
 
@@ -58,79 +80,87 @@ function AccountPage() {
 
 
   return (
-    <section className="page-section">
-      <div className="page-heading">
-        <p className="page-heading__eyebrow">Account</p>
-        <h2>Address details</h2>
-        <p>
-          Look up an address to inspect its balance, nonce, and incoming
-          transfer activity on Sepolia.
-        </p>
-      </div>
+    <section className="page-section data-page">
+      {address ? (
+        <ResultHeader
+          type="Address"
+          identifier={address}
+          description="Balance, nonce, and incoming activity for this Sepolia address."
+        />
+      ) : (
+        <PageIntro
+          title="Find an account"
+          description="Enter a Sepolia wallet address to inspect its current onchain activity."
+        />
+      )}
 
       {!address ? <AccountLookupForm onSubmit={handleLookup} /> : null}
 
-      {accountLoading && address ? (
-        <p className="page-message">Loading account details...</p>
-      ) : null}
-
-      {accountError ? (
-        <p className="page-message page-message--error">{accountError}</p>
-      ) : null}
-
-      {!accountLoading && !accountError && address ? (
-        <>
-          <div className="transaction-details">
-            <article className="detail-card">
-              <p className="detail-card__label">Address</p>
-              <h3 className="detail-card__value">{address}</h3>
-            </article>
-          </div>
-
-          <div className="account-actions">
-            <button
-              className="account-actions__button"
-              type="button"
-              onClick={handleSaveToWatchlist}
-            >
-              Save to Watchlist
-            </button>
-          </div>
-
-          {watchlistMessage.text ? (
-            <p
-              className={`watchlist-feedback watchlist-feedback--${watchlistMessage.type}`}
-            >
-              {watchlistMessage.text}
-            </p>
+      {address ? (
+        <ResultContent identity={address} state={resultState}>
+          {accountLoading ? (
+            <ResultSkeleton rows={3} label="Loading address details" />
           ) : null}
 
+          {accountError ? (
+            <ResultState kind={accountErrorType} type="Address" onRetry={retryAccount} />
+          ) : null}
 
-          <div className="stats-grid">
-            <StatCard title="Balance" value={formatEth(balance)} />
-            <StatCard title="Nonce" value={transactionCount ?? '0'} />
-          </div>
-        </>
-      ) : null}
+          {!accountLoading && !accountError ? (
+            <>
+              <div className="identity-bar">
+                <div>
+                  <span>Wallet address</span>
+                  <CopyableValue value={address} label="wallet address" />
+                </div>
+                <AnimatedAction
+                  className="secondary-action"
+                  type="button"
+                  icon={BookmarkPlusIcon}
+                  iconSize={16}
+                  onClick={handleSaveToWatchlist}
+                >
+                  Save to Watchlist
+                </AnimatedAction>
+              </div>
 
-      {transfersLoading && address ? (
-        <p className="page-message">Loading transfers...</p>
-      ) : null}
+              {watchlistMessage.text ? (
+                <p
+                  className={`watchlist-feedback watchlist-feedback--${watchlistMessage.type}`}
+                >
+                  {watchlistMessage.text}
+                </p>
+              ) : null}
+              <MetricStrip label="Account summary" items={[
+                { label: 'Balance', value: formatEth(balance), note: 'Sepolia ETH' },
+                { label: 'Nonce', value: transactionCount ?? '0', note: 'Transactions sent' },
+                { label: 'Incoming transfers', value: transfersLoading ? 'Loading' : transfers.length },
+              ]} />
 
-      {transfersError ? (
-        <p className="page-message page-message--error">{transfersError}</p>
-      ) : null}
+              {transfersLoading ? <LoadingState rows={3} label="Loading transfers" /> : null}
 
-      {!transfersLoading && !transfersError && transfers.length > 0 ? (
-        <TransfersList transfers={transfers} />
-      ) : null}
+              {transfersError ? (
+                <StatePanel
+                  title="Transfers could not be loaded"
+                  message="The address summary is available, but incoming transfers could not be loaded."
+                  tone="error"
+                  action={{ label: 'Retry transfers', onClick: retryTransfers }}
+                />
+              ) : null}
 
-      {!transfersLoading && !transfersError && address && transfers.length === 0 ? (
-        <p className="page-message">No incoming transfers found for this address.</p>
+              {!transfersLoading && !transfersError && transfers.length > 0 ? (
+                <TransfersList transfers={transfers} />
+              ) : null}
+
+              {!transfersLoading && !transfersError && transfers.length === 0 ? (
+                <StatePanel title="No incoming transfers" message="This address has no incoming transfer activity in the current result window." />
+              ) : null}
+            </>
+          ) : null}
+        </ResultContent>
       ) : null}
     </section>
   );
 }
 
 export default AccountPage;
-

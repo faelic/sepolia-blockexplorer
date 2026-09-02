@@ -1,44 +1,62 @@
 import BlockList from '../components/BlockList';
-import StatCard from '../components/StatCard';
+import LoadingState from '../components/LoadingState';
+import MetricStrip from '../components/MetricStrip';
+import PageIntro from '../components/PageIntro';
+import StatePanel from '../components/StatePanel';
+import HomeSearchHero from '../features/homeHero/HomeSearchHero';
 import useRecentBlocks from '../hooks/useRecentBlocks';
-
+import formatTimestamp from '../utils/FormatTimestamp';
 
 function HomePage() {
   const { latestBlockNumber, blocks, loading, error } = useRecentBlocks();
-
+  const transactionCount = blocks.reduce(
+    (total, block) => total + (block.transactions?.length || 0),
+    0,
+  );
   return (
-    <section className="page-section">
-      <div className="page-heading">
-        <p className="page-heading__eyebrow">Home</p>
-        <h2>Sepolia block activity</h2>
-        <p>
-          Track the latest block number and inspect the most recent blocks on the
-          network.
-        </p>
-      </div>
+    <>
+      <HomeSearchHero />
+      <section
+        className="home-activity"
+        id="network-activity"
+      >
+        <PageIntro
+          headingLevel={2}
+          title="Sepolia, in sequence."
+          description="Follow the newest blocks as they arrive, then open any block to inspect the transactions it contains."
+        />
 
-      {loading ? (
-        <p className="page-message">Loading recent blocks...</p>
-      ) : null}
+        {loading ? <LoadingState rows={5} label="Loading recent blocks" /> : null}
+        {error ? (
+          <StatePanel
+            title="Network activity is unavailable"
+            message={error}
+            tone="error"
+          />
+        ) : null}
 
-      {error ? <p className="page-message page-message--error">{error}</p> : null}
-
-      {!loading && !error ? (
-        blocks.length > 0 ? (
+        {!loading && !error && blocks.length > 0 ? (
           <>
-            <StatCard
-              title="Latest Block"
-              value={latestBlockNumber}
-              note="Live from Sepolia"
+            <MetricStrip
+              label="Sepolia network snapshot"
+              items={[
+                { label: 'Latest block', value: latestBlockNumber },
+                { label: 'Transactions sampled', value: transactionCount },
+                { label: 'Last block', value: formatTimestamp(blocks[0].timestamp) },
+              ]}
             />
-
             <BlockList blocks={blocks} />
           </>
-        ) : (
-          <p className="page-message">No recent blocks available right now.</p>
-        )
-      ) : null}
-    </section>
+        ) : null}
+
+        {!loading && !error && blocks.length === 0 ? (
+          <StatePanel
+            title="No recent blocks"
+            message="Sepolia has not returned recent block activity yet."
+          />
+        ) : null}
+      </section>
+    </>
   );
 }
 

@@ -3,13 +3,13 @@ import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
-test('renders the explorer shell', () => {
+test('renders the explorer shell and account route', async () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={['/accounts']}>
       <App />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
-  expect(screen.getByText(/ChainScope/i)).toBeInTheDocument();
-  expect(screen.getByText(/Explorer Search/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/BlockScan home/i)).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: /Find an account/i })).toBeInTheDocument();
 });

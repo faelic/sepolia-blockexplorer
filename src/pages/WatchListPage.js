@@ -1,26 +1,26 @@
 import Watchlist from '../components/Watchlist';
+import PageIntro from '../components/PageIntro';
+import StatePanel from '../components/StatePanel';
 import useWatchlist from '../hooks/useWatchList';
 
 function WatchlistPage() {
   const { watchlist, removeFromWatchlist } = useWatchlist();
 
   return (
-    <section className="page-section">
-      <div className="page-heading">
-        <p className="page-heading__eyebrow">Watchlist</p>
-        <h2>Saved wallets</h2>
-        <p>
-          View and manage wallet addresses you have saved for quick access.
-        </p>
-      </div>
+    <section className="page-section data-page">
+      <PageIntro
+        title="Saved wallets"
+        description="A local shortlist of Sepolia accounts you want to revisit quickly."
+      />
 
       {watchlist.length > 0 ? (
         <Watchlist addresses={watchlist} onRemove={removeFromWatchlist} />
       ) : (
-        <p className="page-message">
-          No saved wallets yet. Save an address from the account page to add it
-          here.
-        </p>
+        <StatePanel
+          title="Your watchlist is empty"
+          message="Look up an account and save it here for quick access."
+          action={{ label: 'Find an account', to: '/accounts' }}
+        />
       )}
     </section>
   );

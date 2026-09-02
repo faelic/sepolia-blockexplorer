@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+import { isExplorerAddress } from '../lib/explorerSearch';
+import AnimatedAction from './AnimatedAction';
+import { SearchIcon } from './icons';
+
 function AccountLookupForm({ onSubmit }) {
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
@@ -14,7 +18,7 @@ function AccountLookupForm({ onSubmit }) {
       return;
     }
 
-    if (!/^0x[a-fA-F0-9]{40}$/.test(trimmedAddress)) {
+    if (!isExplorerAddress(trimmedAddress)) {
       setError('Enter a valid wallet address.');
       return;
     }
@@ -26,9 +30,8 @@ function AccountLookupForm({ onSubmit }) {
   return (
     <section className="lookup-form-card">
       <div className="lookup-form-card__header">
-        <p className="lookup-form-card__eyebrow">Account Lookup</p>
         <h2>Find an address</h2>
-        <p>Enter a wallet address to view its balance and transaction count.</p>
+        <p>Use a complete 0x wallet address.</p>
       </div>
 
       <form className="lookup-form" onSubmit={handleSubmit}>
@@ -40,16 +43,29 @@ function AccountLookupForm({ onSubmit }) {
           id="account-address"
           className="lookup-form__input"
           type="text"
+          inputMode="text"
+          autoComplete="off"
+          spellCheck="false"
           value={address}
-          onChange={(event) => setAddress(event.target.value)}
-          placeholder="0x..."
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'account-address-error' : undefined}
+          onChange={(event) => {
+            setAddress(event.target.value);
+            if (error) setError('');
+          }}
+          placeholder="0x1234…"
         />
 
-        <button className="lookup-form__button" type="submit">
+        <AnimatedAction
+          className="lookup-form__button"
+          type="submit"
+          icon={SearchIcon}
+          iconSize={16}
+        >
           View Account
-        </button>
+        </AnimatedAction>
 
-        {error ? <p className="lookup-form__error">{error}</p> : null}
+        {error ? <p className="lookup-form__error" id="account-address-error" role="alert">{error}</p> : null}
       </form>
     </section>
   );

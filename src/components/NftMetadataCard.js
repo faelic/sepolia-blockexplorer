@@ -1,50 +1,39 @@
 import truncateValue from '../utils/truncateHash';
+import CopyableValue from './CopyableValue';
 
 function NftMetadataCard({ nft }) {
   const imageUrl =
-    nft.media && nft.media[0] ? nft.media[0].gateway : '';
+    nft.media?.[0]?.gateway || nft.media?.[0]?.thumbnail || nft.raw?.metadata?.image || '';
+  const contractAddress = nft.contract?.address || 'Not available';
 
   return (
     <section className="nft-metadata-card">
-      <div className="nft-metadata-card__header">
-        <p className="nft-metadata-card__eyebrow">NFT Metadata</p>
-        <h2>{nft.title || 'Untitled NFT'}</h2>
-        <p>{nft.description || 'No description available.'}</p>
-      </div>
-
-      {imageUrl ? (
-        <div className="nft-metadata-card__image-wrap">
+      <div className={`nft-metadata-card__image-wrap${imageUrl ? '' : ' is-empty'}`}>
+        {imageUrl ? (
           <img
             className="nft-metadata-card__image"
             src={imageUrl}
             alt={nft.title || 'NFT preview'}
           />
+        ) : <span>No media preview</span>}
+      </div>
+
+      <div className="nft-metadata-card__content">
+        <div className="nft-metadata-card__header">
+          <span>NFT metadata</span>
+          <h2>{nft.title || 'Untitled NFT'}</h2>
+          <p>{nft.description || 'No description is available for this token.'}</p>
         </div>
-      ) : null}
 
-      <div className="transaction-details">
-        <article className="detail-card">
-          <p className="detail-card__label">Contract Address</p>
-          <h3 className="detail-card__value">{nft.contract.address}</h3>
-          <p className="detail-card__hint">{truncateValue(nft.contract.address)}</p>
-        </article>
-
-        <article className="detail-card">
-          <p className="detail-card__label">Token ID</p>
-          <h3 className="detail-card__value">{nft.tokenId}</h3>
-        </article>
-
-        <article className="detail-card">
-          <p className="detail-card__label">Token Type</p>
-          <h3 className="detail-card__value">{nft.tokenType || 'Not available'}</h3>
-        </article>
-
-        <article className="detail-card">
-          <p className="detail-card__label">Collection</p>
-          <h3 className="detail-card__value">
-            {nft.contract.openSea?.collectionName || 'Not available'}
-          </h3>
-        </article>
+        <dl className="nft-metadata-list">
+          <div><dt>Contract</dt><dd title={contractAddress}>{truncateValue(contractAddress)}</dd></div>
+          <div><dt>Token ID</dt><dd>{nft.tokenId ?? 'Not available'}</dd></div>
+          <div><dt>Token type</dt><dd>{nft.tokenType || 'Not available'}</dd></div>
+          <div><dt>Collection</dt><dd>{nft.contract?.openSea?.collectionName || 'Not available'}</dd></div>
+        </dl>
+        {contractAddress !== 'Not available' ? (
+          <CopyableValue value={contractAddress} label="contract address" compact />
+        ) : null}
       </div>
     </section>
   );

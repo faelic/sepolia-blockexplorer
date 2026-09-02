@@ -1,26 +1,37 @@
 import { Link } from 'react-router-dom';
-import truncateValue from '../utils/truncateHash';
+
+import AnimatedAction from './AnimatedAction';
+import CopyableValue from './CopyableValue';
+import { ArrowRightIcon, BookmarkXIcon } from './icons';
 
 function WatchlistItem({ address, onRemove }) {
   return (
     <article className="watchlist-item">
       <div className="watchlist-item__content">
-        <p className="watchlist-item__label">Saved Wallet</p>
-        <h3 className="watchlist-item__value">{truncateValue(address, 10, 8)}</h3>
-        <p className="watchlist-item__full">{address}</p>
+        <span>Sepolia wallet</span>
+        <CopyableValue value={address} label="wallet address" />
       </div>
 
       <div className="watchlist-item__actions">
-        <Link className="watchlist-item__link" to={`/accounts/${address}`}>
-          View
-        </Link>
-        <button
+        <AnimatedAction
+          as={Link}
+          className="watchlist-item__link"
+          to={`/accounts/${address}`}
+          icon={ArrowRightIcon}
+          iconPosition="end"
+          iconSize={15}
+        >
+          Open account
+        </AnimatedAction>
+        <AnimatedAction
           className="watchlist-item__button"
           type="button"
+          icon={BookmarkXIcon}
+          iconSize={15}
           onClick={() => onRemove(address)}
         >
           Remove
-        </button>
+        </AnimatedAction>
       </div>
     </article>
   );
