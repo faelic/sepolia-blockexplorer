@@ -271,9 +271,11 @@
 }
 
 .explorer-search__controls:focus-within {
-  border-color: var(--line-accent);
+  border-color: rgba(220, 224, 221, 0.36);
   background: var(--surface-elevated);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  box-shadow:
+    0 0 0 3px rgba(220, 224, 221, 0.1),
+    0 14px 42px rgba(0, 0, 0, 0.28);
 }
 
 .explorer-search__controls.is-invalid { border-color: rgba(255, 143, 134, 0.54); }
@@ -880,7 +882,12 @@
 .lookup-form__input,
 .nft-form__input { min-width: 0; min-height: 48px; border: 1px solid var(--line-strong); border-radius: var(--radius-control); outline: 0; padding: 0 14px; background: var(--surface); caret-color: var(--accent); }
 .lookup-form__input:focus,
-.nft-form__input:focus { border-color: var(--line-accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.nft-form__input:focus {
+  border-color: rgba(220, 224, 221, 0.36);
+  box-shadow:
+    0 0 0 3px rgba(220, 224, 221, 0.1),
+    0 12px 34px rgba(0, 0, 0, 0.24);
+}
 .lookup-form__button,
 .nft-form__button { min-height: 48px; }
 .nft-form__button { margin-top: 8px; }
