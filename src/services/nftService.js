@@ -1,10 +1,18 @@
-import alchemy from './alchemyClient';
-
 export async function getNftMetadata(contractAddress, tokenId) {
   let nft;
 
   try {
-    nft = await alchemy.nft.getNftMetadata(contractAddress, tokenId);
+    const params = new URLSearchParams({
+      contractAddress,
+      tokenId,
+    });
+    const response = await fetch(`/api/nft-metadata?${params.toString()}`);
+
+    if (!response.ok) {
+      throw new Error('NFT metadata could not be loaded.');
+    }
+
+    nft = await response.json();
   } catch (error) {
     throw new Error('NFT metadata could not be loaded. Confirm the contract and token ID, then try again.');
   }

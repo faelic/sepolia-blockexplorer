@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AnimatedAction from './AnimatedAction';
 import { ArrowRightIcon } from './icons';
 
-function StatePanel({ title, message, tone = 'neutral', action, detail }) {
+function StatePanel({ title, message, tone = 'neutral', action }) {
   const actionContent = action?.to ? (
     <AnimatedAction
       as={Link}
@@ -36,12 +36,6 @@ function StatePanel({ title, message, tone = 'neutral', action, detail }) {
       <div className="state-panel__content">
         <h2>{title}</h2>
         <p>{message}</p>
-        {detail ? (
-          <details className="state-panel__detail">
-            <summary>Technical details</summary>
-            <code>{detail}</code>
-          </details>
-        ) : null}
       </div>
       {actionContent}
     </section>

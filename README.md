@@ -163,16 +163,27 @@ npm install
 Create a `.env` file in the project root:
 
 ```bash
-REACT_APP_ALCHEMY_API_KEY=your_alchemy_api_key_here
+ALCHEMY_API_KEY=your_alchemy_api_key_here
 ```
 
-The application is configured to use the Ethereum Sepolia testnet.
+The application is configured to use the Ethereum Sepolia testnet. In production,
+set `ALCHEMY_API_KEY` in Vercel as a server-side environment variable.
+
+For local development with the private API proxy, run the app through Vercel:
+
+```bash
+vercel dev
+```
 
 ### 3. Start Development Server
 
 ```bash
-npm start
+npm run dev
 ```
+
+This runs the React dev server behind a local API proxy, so requests to
+`/api/sepolia-rpc` and `/api/nft-metadata` work on `localhost` without exposing
+the Alchemy key in the browser.
 
 ### 4. Build for Production
 

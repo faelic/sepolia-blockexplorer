@@ -707,34 +707,6 @@
 .state-panel__content { min-width: 0; }
 .state-panel h2 { margin: 0; font-size: 19px; font-weight: 650; }
 .state-panel p { max-width: 62ch; margin: 8px 0 0; color: var(--text-secondary); line-height: 1.55; }
-.state-panel__detail {
-  max-width: min(100%, 760px);
-  margin-top: 14px;
-  color: var(--text-tertiary);
-  font-size: 11px;
-}
-.state-panel__detail summary {
-  width: max-content;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-weight: 650;
-}
-.state-panel__detail code {
-  display: block;
-  max-height: 120px;
-  overflow: auto;
-  margin-top: 10px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 12px;
-  background: rgba(6, 9, 8, 0.52);
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1.55;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
 .state-panel__action,
 .secondary-action,
 .watchlist-item__link,

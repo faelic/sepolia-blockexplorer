@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import StatePanel from './StatePanel';
 
-test('presents a calm error state with collapsible technical details', () => {
+test('presents a calm error state without exposing technical details', () => {
   render(
     <MemoryRouter>
       <StatePanel
@@ -11,14 +11,13 @@ test('presents a calm error state with collapsible technical details', () => {
         message="Live Sepolia activity is temporarily paused. Check your connection, then retry the feed."
         tone="error"
         action={{ label: 'Retry feed', onClick: jest.fn() }}
-        detail="missing response requestBody eth_blockNumber"
       />
     </MemoryRouter>,
   );
 
   expect(screen.getByRole('alert')).toBeInTheDocument();
   expect(screen.getByText(/Live Sepolia activity is temporarily paused/i)).toBeInTheDocument();
-  expect(screen.getByText('Technical details')).toBeInTheDocument();
-  expect(screen.getByText(/eth_blockNumber/i)).toBeInTheDocument();
+  expect(screen.queryByText('Technical details')).not.toBeInTheDocument();
+  expect(screen.queryByText(/eth_blockNumber|requestBody/i)).not.toBeInTheDocument();
   expect(screen.getByRole('button', { name: /Retry feed/i })).toBeInTheDocument();
 });

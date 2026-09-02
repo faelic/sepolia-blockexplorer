@@ -19,7 +19,6 @@ function TransactionPage() {
     receipt,
     loading,
     error,
-    errorDetail,
     errorType,
     retry,
   } = useTransactionDetails(txHash);
@@ -42,7 +41,6 @@ function TransactionPage() {
             kind={errorType}
             type="Transaction"
             onRetry={retry}
-            detail={errorDetail}
           />
         ) : null}
 

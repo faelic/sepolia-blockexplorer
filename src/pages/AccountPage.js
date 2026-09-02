@@ -33,7 +33,6 @@ function AccountPage() {
     transactionCount,
     loading: accountLoading,
     error: accountError,
-    errorDetail: accountErrorDetail,
     errorType: accountErrorType,
     retry: retryAccount,
   } = useAccountDetails(address);
@@ -42,7 +41,6 @@ function AccountPage() {
     transfers,
     loading: transfersLoading,
     error: transfersError,
-    errorDetail: transfersErrorDetail,
     retry: retryTransfers,
   } = useAddressTransfers(address);
 
@@ -109,7 +107,6 @@ function AccountPage() {
               kind={accountErrorType}
               type="Address"
               onRetry={retryAccount}
-              detail={accountErrorDetail}
             />
           ) : null}
 
@@ -152,7 +149,6 @@ function AccountPage() {
                   message={transfersError}
                   tone="error"
                   action={{ label: 'Retry transfers', onClick: retryTransfers }}
-                  detail={transfersErrorDetail}
                 />
               ) : null}
 

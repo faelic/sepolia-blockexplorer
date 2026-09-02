@@ -5,10 +5,7 @@ import {
   getLatestBlockNumber,
   getRecentBlocks,
 } from '../services/blockService';
-import {
-  NETWORK_ACTIVITY_ERROR_MESSAGE,
-  getErrorDetail,
-} from '../lib/errorMessages';
+import { NETWORK_ACTIVITY_ERROR_MESSAGE } from '../lib/errorMessages';
 
 const POLL_INTERVAL = 12000;
 const BLOCK_LIMIT = 6;
@@ -31,7 +28,6 @@ function useRecentBlocks() {
   const [blocks, setBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [errorDetail, setErrorDetail] = useState('');
   const [attempt, setAttempt] = useState(0);
   const latestBlockRef = useRef(null);
 
@@ -57,12 +53,10 @@ function useRecentBlocks() {
         latestBlockRef.current = data.latestBlockNumber;
         setLatestBlockNumber(data.latestBlockNumber);
         setBlocks(data.blocks);
-        setErrorDetail('');
-      } catch (err) {
+      } catch {
         if (!active) return;
 
         setError(NETWORK_ACTIVITY_ERROR_MESSAGE);
-        setErrorDetail(getErrorDetail(err));
       } finally {
         if (!active) return;
         setLoading(false);
@@ -86,7 +80,6 @@ function useRecentBlocks() {
           setLatestBlockNumber(snapshot.latestBlockNumber);
           setBlocks(snapshot.blocks);
           setError('');
-          setErrorDetail('');
           setLoading(false);
           return;
         }
@@ -111,7 +104,6 @@ function useRecentBlocks() {
         setLatestBlockNumber(nextLatest);
         setBlocks((current) => mergeRecentBlocks(current, unseenBlocks));
         setError('');
-        setErrorDetail('');
       } catch {
         // Preserve the last usable snapshot when a background refresh fails.
       } finally {
@@ -141,7 +133,6 @@ function useRecentBlocks() {
     blocks,
     loading,
     error,
-    errorDetail,
     retry,
   };
 }

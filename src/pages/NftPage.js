@@ -13,7 +13,7 @@ function NftPage() {
     tokenId: '',
   });
 
-  const { nft, loading, error, errorDetail } = useNftMetadata(
+  const { nft, loading, error } = useNftMetadata(
     searchValues.contractAddress,
     searchValues.tokenId
   );
@@ -41,7 +41,6 @@ function NftPage() {
               title="NFT could not be loaded"
               message={error}
               tone="error"
-              detail={errorDetail}
             />
           ) : null}
           {!loading && !error && nft ? <NftMetadataCard nft={nft} /> : null}

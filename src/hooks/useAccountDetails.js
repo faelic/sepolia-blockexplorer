@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { getAccountDetails } from '../services/accountService';
-import { NETWORK_ERROR_MESSAGE, getErrorDetail } from '../lib/errorMessages';
+import { NETWORK_ERROR_MESSAGE } from '../lib/errorMessages';
 
 function useAccountDetails(address) {
   const [attempt, setAttempt] = useState(0);
@@ -11,7 +11,6 @@ function useAccountDetails(address) {
     transactionCount: null,
     status: 'idle',
     error: '',
-    errorDetail: '',
   });
 
   useEffect(() => {
@@ -29,7 +28,6 @@ function useAccountDetails(address) {
           transactionCount: null,
           status: 'loading',
           error: '',
-          errorDetail: '',
         });
 
         const data = await getAccountDetails(address);
@@ -44,9 +42,8 @@ function useAccountDetails(address) {
           transactionCount: data.transactionCount,
           status: 'success',
           error: '',
-          errorDetail: '',
         });
-      } catch (err) {
+      } catch {
         if (!isMounted) {
           return;
         }
@@ -57,7 +54,6 @@ function useAccountDetails(address) {
           transactionCount: null,
           status: 'error',
           error: NETWORK_ERROR_MESSAGE,
-          errorDetail: getErrorDetail(err),
         });
       }
     }
@@ -77,7 +73,6 @@ function useAccountDetails(address) {
     transactionCount: isCurrentRequest ? request.transactionCount : null,
     loading: Boolean(address) && (!isCurrentRequest || request.status === 'loading'),
     error: isCurrentRequest ? request.error : '',
-    errorDetail: isCurrentRequest ? request.errorDetail : '',
     errorType: isCurrentRequest && request.error ? 'network' : '',
     retry,
   };

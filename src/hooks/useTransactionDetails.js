@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { getTransactionDetails } from '../services/transactionService';
-import { NETWORK_ERROR_MESSAGE, getErrorDetail } from '../lib/errorMessages';
+import { NETWORK_ERROR_MESSAGE } from '../lib/errorMessages';
 
 function useTransactionDetails(txHash) {
   const [attempt, setAttempt] = useState(0);
@@ -11,7 +11,6 @@ function useTransactionDetails(txHash) {
     receipt: null,
     status: 'idle',
     error: '',
-    errorDetail: '',
     errorType: '',
   });
 
@@ -30,7 +29,6 @@ function useTransactionDetails(txHash) {
           receipt: null,
           status: 'loading',
           error: '',
-          errorDetail: '',
           errorType: '',
         });
 
@@ -46,7 +44,6 @@ function useTransactionDetails(txHash) {
           receipt: data.receipt,
           status: 'success',
           error: '',
-          errorDetail: '',
           errorType: '',
         });
       } catch (err) {
@@ -60,7 +57,6 @@ function useTransactionDetails(txHash) {
           receipt: null,
           status: 'error',
           error: err.code === 'NOT_FOUND' ? 'Transaction not found.' : NETWORK_ERROR_MESSAGE,
-          errorDetail: err.code === 'NOT_FOUND' ? '' : getErrorDetail(err),
           errorType: err.code === 'NOT_FOUND' ? 'not-found' : 'network',
         });
       }
@@ -81,7 +77,6 @@ function useTransactionDetails(txHash) {
     receipt: isCurrentRequest ? request.receipt : null,
     loading: Boolean(txHash) && (!isCurrentRequest || request.status === 'loading'),
     error: isCurrentRequest ? request.error : '',
-    errorDetail: isCurrentRequest ? request.errorDetail : '',
     errorType: isCurrentRequest ? request.errorType : '',
     retry,
   };

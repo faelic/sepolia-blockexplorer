@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { getAddressTransfers } from '../services/transferService';
-import { TRANSFERS_ERROR_MESSAGE, getErrorDetail } from '../lib/errorMessages';
+import { TRANSFERS_ERROR_MESSAGE } from '../lib/errorMessages';
 
 function useAddressTransfers(address) {
   const [attempt, setAttempt] = useState(0);
@@ -10,7 +10,6 @@ function useAddressTransfers(address) {
     transfers: [],
     status: 'idle',
     error: '',
-    errorDetail: '',
   });
 
   useEffect(() => {
@@ -27,7 +26,6 @@ function useAddressTransfers(address) {
           transfers: [],
           status: 'loading',
           error: '',
-          errorDetail: '',
         });
 
         const data = await getAddressTransfers(address);
@@ -41,9 +39,8 @@ function useAddressTransfers(address) {
           transfers: data,
           status: 'success',
           error: '',
-          errorDetail: '',
         });
-      } catch (err) {
+      } catch {
         if (!isMounted) {
           return;
         }
@@ -53,7 +50,6 @@ function useAddressTransfers(address) {
           transfers: [],
           status: 'error',
           error: TRANSFERS_ERROR_MESSAGE,
-          errorDetail: getErrorDetail(err),
         });
       }
     }
@@ -72,7 +68,6 @@ function useAddressTransfers(address) {
     transfers: isCurrentRequest ? request.transfers : [],
     loading: Boolean(address) && (!isCurrentRequest || request.status === 'loading'),
     error: isCurrentRequest ? request.error : '',
-    errorDetail: isCurrentRequest ? request.errorDetail : '',
     retry,
   };
 }

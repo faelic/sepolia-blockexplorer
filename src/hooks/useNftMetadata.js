@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { getNftMetadata } from '../services/nftService';
-import { NFT_ERROR_MESSAGE, getErrorDetail } from '../lib/errorMessages';
+import { NFT_ERROR_MESSAGE } from '../lib/errorMessages';
 
 function useNftMetadata(contractAddress, tokenId) {
   const [nft, setNft] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [errorDetail, setErrorDetail] = useState('');
 
   useEffect(() => {
     if (!contractAddress || !tokenId) {
@@ -20,7 +19,6 @@ function useNftMetadata(contractAddress, tokenId) {
       try {
         setLoading(true);
         setError('');
-        setErrorDetail('');
 
         const data = await getNftMetadata(contractAddress, tokenId);
 
@@ -29,14 +27,12 @@ function useNftMetadata(contractAddress, tokenId) {
         }
 
         setNft(data);
-        setErrorDetail('');
-      } catch (err) {
+      } catch {
         if (!isMounted) {
           return;
         }
 
         setError(NFT_ERROR_MESSAGE);
-        setErrorDetail(getErrorDetail(err));
       } finally {
         if (isMounted) {
           setLoading(false);
@@ -55,7 +51,6 @@ function useNftMetadata(contractAddress, tokenId) {
     nft,
     loading,
     error,
-    errorDetail,
   };
 }
 

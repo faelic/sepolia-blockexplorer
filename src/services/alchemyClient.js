@@ -1,10 +1,9 @@
 import { Alchemy } from 'alchemy-sdk';
 
-const apiKey = process.env.REACT_APP_ALCHEMY_API_KEY;
+const rpcUrl = process.env.REACT_APP_ALCHEMY_RPC_URL || '/api/sepolia-rpc';
 
 const settings = {
-  apiKey,
-  url: apiKey ? `https://eth-sepolia.g.alchemy.com/v2/${apiKey}` : undefined,
+  url: rpcUrl,
 };
 
 const alchemy = new Alchemy(settings);

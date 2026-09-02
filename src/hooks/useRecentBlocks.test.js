@@ -66,7 +66,6 @@ describe('useRecentBlocks', () => {
       'Live Sepolia activity is temporarily paused. Check your connection, then retry the feed.',
     );
     expect(result.current.error).not.toMatch(/eth_blockNumber|requestBody|alchemy/i);
-    expect(result.current.errorDetail).toMatch(/eth_blockNumber/);
   });
 
   test('retries the live feed after an initial network failure', async () => {

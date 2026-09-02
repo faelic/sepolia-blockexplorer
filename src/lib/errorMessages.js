@@ -9,9 +9,3 @@ export const NFT_ERROR_MESSAGE =
 
 export const TRANSFERS_ERROR_MESSAGE =
   'The address summary loaded, but incoming transfers are temporarily unavailable.';
-
-export function getErrorDetail(error) {
-  if (!error) return '';
-  if (error instanceof Error) return error.message;
-  return String(error);
-}
