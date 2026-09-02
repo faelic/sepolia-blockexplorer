@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
   <title id="title">BlockScan aperture mark</title>
-  <desc id="desc">Four modular blocks form a scanning aperture around a teal beam.</desc>
+  <desc id="desc">Four modular blocks form a scanning aperture around a green beam.</desc>
   <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="13.25" fill="#0B0F0F" stroke="#26302D" stroke-width="1.5"/>
   <path fill="#F3F6F2" d="M10 10h13v5h-8v8h-5V10Zm15 0h13v13h-5v-8h-8v-5ZM10 25h5v8h8v5H10V25Zm23 0h5v13H25v-5h8v-8Z"/>
-  <rect x="16" y="22.5" width="16" height="3" rx="1.5" fill="#08706D"/>
+  <rect x="16" y="22.5" width="16" height="3" rx="1.5" fill="#26A17B"/>
 </svg>

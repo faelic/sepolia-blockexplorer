@@ -4,18 +4,29 @@
   font-synthesis: none;
   --font-sans: 'Manrope Variable', Manrope, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --type-display: clamp(3.5rem, 5.25vw, 4.75rem);
+  --type-page-title: clamp(2.75rem, 4.75vw, 4.25rem);
+  --type-result-title: clamp(2rem, 3.4vw, 3rem);
+  --type-section-title: 1.5rem;
+  --type-subheading: 1.25rem;
+  --type-body: 1rem;
+  --type-body-small: 0.9375rem;
+  --type-ui: 0.8125rem;
+  --type-label: 0.75rem;
+  --type-meta: 0.6875rem;
   --canvas: #05070a;
   --canvas-lift: #080b0d;
   --surface: #0b0f0f;
   --surface-elevated: #111514;
   --surface-strong: #16201e;
   --text-primary: #f3f6f2;
-  --text-secondary: #909a95;
-  --text-tertiary: #707a75;
-  --accent: #08706d;
-  --accent-strong: #15908b;
-  --accent-deep: #024241;
-  --accent-soft: rgba(3, 83, 82, 0.14);
+  --text-secondary: #9aa49f;
+  --text-tertiary: #7a857f;
+  --accent: #26a17b;
+  --accent-strong: #26a17b;
+  --accent-hover: #3ab88f;
+  --accent-deep: #0d5e49;
+  --accent-soft: rgba(38, 161, 123, 0.14);
   --warning: #d9b36b;
   --warning-soft: rgba(217, 179, 107, 0.1);
   --danger: #ff8f86;
@@ -24,7 +35,7 @@
   --success-soft: rgba(120, 210, 168, 0.09);
   --line: rgba(144, 154, 149, 0.16);
   --line-strong: rgba(144, 154, 149, 0.28);
-  --line-accent: rgba(8, 112, 109, 0.66);
+  --line-accent: rgba(38, 161, 123, 0.58);
   --radius-panel: 14px;
   --radius-control: 10px;
   --header-height: 76px;
@@ -37,7 +48,7 @@ html {
   min-width: 320px;
   scroll-behavior: smooth;
   background: var(--canvas);
-  scrollbar-color: #34463f var(--canvas);
+  scrollbar-color: #365047 var(--canvas);
   scrollbar-width: thin;
 }
 
@@ -48,6 +59,13 @@ body {
   overflow-x: hidden;
   background: var(--canvas);
   color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-optical-sizing: auto;
+  font-variant-numeric: proportional-nums;
+  font-weight: 450;
+  letter-spacing: -0.008em;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -58,10 +76,14 @@ button { cursor: pointer; }
 button:disabled { cursor: not-allowed; }
 a { color: inherit; text-underline-offset: 0.22em; }
 button, a { -webkit-tap-highlight-color: transparent; }
-code, pre, kbd, samp { font-family: var(--font-mono); }
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+  letter-spacing: 0;
+}
 
 ::selection {
-  background: rgba(114, 216, 179, 0.22);
+  background: rgba(38, 161, 123, 0.3);
   color: #ffffff;
 }
 
@@ -75,7 +97,17 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 ::-webkit-scrollbar-thumb {
   border: 3px solid var(--canvas);
   border-radius: 10px;
-  background: #34463f;
+  background: #365047;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --type-display: clamp(2.625rem, 11.5vw, 3.5rem);
+    --type-page-title: clamp(2.375rem, 10.5vw, 3rem);
+    --type-result-title: clamp(1.75rem, 8.5vw, 2.375rem);
+    --type-section-title: 1.375rem;
+    --type-subheading: 1.125rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -14,7 +14,7 @@
   place-items: center;
   padding: calc(var(--header-height) + 64px) 24px 112px;
   background:
-    radial-gradient(ellipse at 50% 62%, rgba(8, 112, 109, 0.08), transparent 38%),
+    radial-gradient(ellipse at 50% 62%, rgba(38, 161, 123, 0.09), transparent 38%),
     linear-gradient(180deg, #05070a 0%, #070b0c 58%, #05070a 100%);
   isolation: isolate;
 }
@@ -162,9 +162,9 @@
   gap: 11px;
   color: rgba(206, 214, 209, 0.68);
   font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.035em;
+  font-size: var(--type-ui);
+  font-weight: 500;
+  letter-spacing: 0.025em;
   line-height: 1;
   white-space: nowrap;
 }
@@ -208,18 +208,19 @@
 .home-search-hero__content {
   position: relative;
   z-index: 4;
-  width: min(100%, 780px);
+  width: min(100%, 1040px);
   text-align: center;
 }
 
 .home-search-hero__content h1 {
   margin: 0;
   color: var(--text-primary);
-  font-size: clamp(60px, 4.45vw, 64px);
-  font-weight: 800;
+  font-size: var(--type-display);
+  font-weight: 760;
   letter-spacing: -0.04em;
-  line-height: 1.035;
+  line-height: 1.02;
   text-wrap: balance;
+  white-space: nowrap;
 }
 
 .home-search-hero__content h1 span {
@@ -229,9 +230,11 @@
 .home-search-hero__content p {
   margin: 22px auto 28px;
   max-width: 620px;
-  color: #d4d9d5;
-  font-size: clamp(18px, 1.35vw, 20px);
-  line-height: 1.5;
+  color: var(--text-secondary);
+  font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+  font-weight: 450;
+  letter-spacing: -0.012em;
+  line-height: 1.58;
 }
 
 .home-search-hero .explorer-search--plain-hero {
@@ -277,7 +280,8 @@
   min-height: 62px;
   padding-left: 20px;
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: var(--type-body);
+  font-weight: 500;
   text-align: center;
 }
 
@@ -324,7 +328,7 @@
 
   .token-marquee__item {
     gap: 10px;
-    font-size: 13px;
+    font-size: var(--type-label);
   }
 
   .token-marquee__logo {
@@ -351,13 +355,16 @@
   }
 
   .home-search-hero__content h1 {
-    font-size: clamp(44px, 5vw, 72px);
-    line-height: 1.02;
+    font-size: var(--type-display);
+    line-height: 1.04;
+    white-space: normal;
   }
 
   .home-search-hero__content p {
     margin: 18px auto 24px;
-    font-size: 16px;
+    max-width: 34ch;
+    font-size: var(--type-body);
+    line-height: 1.6;
   }
 
   .home-search-hero .explorer-search--plain-hero .explorer-search__controls {
@@ -371,7 +378,7 @@
   .home-search-hero .explorer-search--plain-hero .explorer-search__input {
     min-height: 58px;
     padding-left: 16px;
-    font-size: 16px;
+    font-size: var(--type-body-small);
   }
 
   .home-search-hero .explorer-search--plain-hero .explorer-search__button {
@@ -392,7 +399,7 @@
 
   .token-marquee__item {
     gap: 9px;
-    font-size: 12px;
+    font-size: var(--type-meta);
   }
 
   .token-marquee__logo {
