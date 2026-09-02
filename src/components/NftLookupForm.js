@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import AnimatedAction from './AnimatedAction';
+import FieldShell from './FieldShell';
 import { SearchIcon } from './icons';
 
 function NftLookupForm({ onSubmit }) {
@@ -36,54 +37,57 @@ function NftLookupForm({ onSubmit }) {
       </div>
 
       <form className="nft-form" onSubmit={handleSubmit}>
-        <label className="nft-form__label" htmlFor="contract-address">
-          Contract Address
-        </label>
-        <input
-          id="contract-address"
-          className="nft-form__input"
-          type="text"
-          autoComplete="off"
-          spellCheck="false"
-          value={contractAddress}
-          aria-invalid={error ? 'true' : undefined}
-          aria-describedby={error ? 'nft-lookup-error' : undefined}
-          onChange={(event) => {
-            setContractAddress(event.target.value);
-            if (error) setError('');
-          }}
-          placeholder="0x1234…"
-        />
-
-        <label className="nft-form__label" htmlFor="token-id">
-          Token ID
-        </label>
-        <input
-          id="token-id"
-          className="nft-form__input"
-          type="text"
-          inputMode="numeric"
-          autoComplete="off"
-          value={tokenId}
-          aria-invalid={error ? 'true' : undefined}
-          aria-describedby={error ? 'nft-lookup-error' : undefined}
-          onChange={(event) => {
-            setTokenId(event.target.value);
-            if (error) setError('');
-          }}
-          placeholder="1"
-        />
-
-        <AnimatedAction
-          className="nft-form__button"
-          type="submit"
-          icon={SearchIcon}
-          iconSize={16}
+        <FieldShell
+          className="field-shell--nft"
+          error={error}
+          errorId="nft-lookup-error"
+          errorClassName="nft-form__error"
         >
-          Fetch Metadata
-        </AnimatedAction>
-
-        {error ? <p className="nft-form__error" id="nft-lookup-error" role="alert">{error}</p> : null}
+          <label className="nft-form__label" htmlFor="contract-address">
+            Contract Address
+          </label>
+          <input
+            id="contract-address"
+            className="nft-form__input"
+            type="text"
+            autoComplete="off"
+            spellCheck="false"
+            value={contractAddress}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={error ? 'nft-lookup-error' : undefined}
+            onChange={(event) => {
+              setContractAddress(event.target.value);
+              if (error) setError('');
+            }}
+            placeholder="0x1234…"
+          />
+          <label className="nft-form__label" htmlFor="token-id">
+            Token ID
+          </label>
+          <input
+            id="token-id"
+            className="nft-form__input"
+            type="text"
+            inputMode="numeric"
+            autoComplete="off"
+            value={tokenId}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={error ? 'nft-lookup-error' : undefined}
+            onChange={(event) => {
+              setTokenId(event.target.value);
+              if (error) setError('');
+            }}
+            placeholder="1"
+          />
+          <AnimatedAction
+            className="nft-form__button"
+            type="submit"
+            icon={SearchIcon}
+            iconSize={16}
+          >
+            Fetch Metadata
+          </AnimatedAction>
+        </FieldShell>
       </form>
     </section>
   );

@@ -14,28 +14,40 @@
   --type-ui: 0.8125rem;
   --type-label: 0.75rem;
   --type-meta: 0.6875rem;
-  --canvas: #05070a;
-  --canvas-lift: #080b0d;
-  --surface: #0b0f0f;
-  --surface-elevated: #111514;
-  --surface-strong: #16201e;
-  --text-primary: #f3f6f2;
-  --text-secondary: #9aa49f;
-  --text-tertiary: #7a857f;
-  --accent: #26a17b;
-  --accent-strong: #26a17b;
-  --accent-hover: #3ab88f;
-  --accent-deep: #0d5e49;
-  --accent-soft: rgba(38, 161, 123, 0.14);
+  --canvas: #050505;
+  --canvas-lift: #090909;
+  --surface: #0d0d0d;
+  --surface-elevated: #141414;
+  --surface-strong: #1b1b1b;
+  --text-primary: #f4f4f4;
+  --text-secondary: #a3a3a3;
+  --text-tertiary: #7d7d7d;
+  --interactive: #f4f4f4;
+  --interactive-hover: #ffffff;
+  --interactive-inverse: #080808;
+  --interactive-soft: rgba(244, 244, 244, 0.08);
+  --brand-accent: #3b6bff;
+  --brand-accent-soft: rgba(59, 107, 255, 0.14);
+  --brand-accent-line: rgba(59, 107, 255, 0.34);
+  --focus-ring: rgba(244, 244, 244, 0.14);
   --warning: #d9b36b;
   --warning-soft: rgba(217, 179, 107, 0.1);
+  --warning-line: rgba(217, 179, 107, 0.28);
   --danger: #ff8f86;
+  --danger-strong: #ffaaa3;
   --danger-soft: rgba(255, 143, 134, 0.09);
+  --danger-line: rgba(255, 143, 134, 0.3);
   --success: #78d2a8;
   --success-soft: rgba(120, 210, 168, 0.09);
-  --line: rgba(144, 154, 149, 0.16);
-  --line-strong: rgba(144, 154, 149, 0.28);
-  --line-accent: rgba(38, 161, 123, 0.58);
+  --success-line: rgba(120, 210, 168, 0.3);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-faint: rgba(255, 255, 255, 0.06);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --line-interactive: rgba(255, 255, 255, 0.32);
+  --track-primary: rgba(255, 255, 255, 0.095);
+  --track-secondary: rgba(255, 255, 255, 0.052);
+  --track-primary-strong: rgba(255, 255, 255, 0.14);
+  --track-secondary-strong: rgba(255, 255, 255, 0.078);
   --radius-panel: 14px;
   --radius-control: 10px;
   --header-height: 76px;
@@ -48,7 +60,7 @@ html {
   min-width: 320px;
   scroll-behavior: smooth;
   background: var(--canvas);
-  scrollbar-color: #365047 var(--canvas);
+  scrollbar-color: #474747 var(--canvas);
   scrollbar-width: thin;
 }
 
@@ -83,12 +95,12 @@ code, pre, kbd, samp {
 }
 
 ::selection {
-  background: rgba(38, 161, 123, 0.3);
-  color: #ffffff;
+  background: rgba(244, 244, 244, 0.22);
+  color: var(--interactive-hover);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--interactive);
   outline-offset: 3px;
 }
 
@@ -97,7 +109,7 @@ code, pre, kbd, samp {
 ::-webkit-scrollbar-thumb {
   border: 3px solid var(--canvas);
   border-radius: 10px;
-  background: #365047;
+  background: #474747;
 }
 
 @media (max-width: 767px) {

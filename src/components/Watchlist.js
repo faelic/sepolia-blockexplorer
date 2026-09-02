@@ -1,6 +1,7 @@
 import WatchlistItem from './WatchlistItem';
+import { AnimatePresence } from 'motion/react';
 
-function Watchlist({ addresses, onRemove }) {
+function Watchlist({ addresses, onRequestRemove }) {
   return (
     <section className="watchlist">
       <div className="data-section-heading">
@@ -12,9 +13,16 @@ function Watchlist({ addresses, onRemove }) {
       </div>
 
       <div className="data-list watchlist__items">
-        {addresses.map((address) => (
-          <WatchlistItem key={address} address={address} onRemove={onRemove} />
-        ))}
+        <AnimatePresence>
+          {addresses.map((address, index) => (
+            <WatchlistItem
+              key={address}
+              address={address}
+              index={index}
+              onRequestRemove={onRequestRemove}
+            />
+          ))}
+        </AnimatePresence>
       </div>
     </section>
   );

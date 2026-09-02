@@ -40,8 +40,8 @@ Users arrive with a block number, transaction hash, Ethereum address, or NFT loo
 
 - Product name: BlockScan.
 - Network identity: Sepolia Testnet Explorer.
-- The approved identity uses Void Black, Observatory Surface, muted Authentic and Interactive Teal, warm-white Manrope Variable interface type, and IBM Plex Mono for exact chain values.
-- Sidecar Yellow is the single dominant Home search action; it does not become a general decorative accent.
+- The approved identity uses a near-monochrome system of black, charcoal, warm white, and neutral grey, with a restrained Sepolia blue reserved for network identity and active wayfinding. Manrope Variable handles interface type and IBM Plex Mono handles exact chain values.
+- Green, amber, and red are reserved for confirmed success, caution, and destructive or failure states. Third-party token logos and content imagery retain their authentic colors.
 - Existing primary navigation labels remain Home, Accounts, NFTs, and Watchlist.
 - Product language is concise, technical, and functional. The Home copy is fixed to “See Sepolia as it happens.” and “Search blocks, transactions, and addresses instantly.”
 - Motion stays quiet and explanatory; it must not imply interactivity on decorative data or interpolate invented values.

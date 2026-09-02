@@ -12,6 +12,8 @@ import ResultHeader from '../components/ResultHeader';
 import ResultSkeleton from '../components/ResultSkeleton';
 import ResultState from '../components/ResultState';
 import StatePanel from '../components/StatePanel';
+import ActionSwap from '../components/ActionSwap';
+import { useToast } from '../components/ToastProvider';
 import TransfersList from '../components/TransferList';
 import { BookmarkPlusIcon } from '../components/icons';
 import useAccountDetails from '../hooks/useAccountDetails';
@@ -23,10 +25,8 @@ import formatEth from '../utils/formatEth';
 function AccountPage() {
   const { address } = useParams();
   const history = useHistory();
-  const [watchlistMessage, setWatchlistMessage] = useState({
-    text: '',
-    type: '',
-  });
+  const [watchlistStatus, setWatchlistStatus] = useState('');
+  const { showToast } = useToast();
 
   const {
     balance,
@@ -52,7 +52,7 @@ function AccountPage() {
       : 'ready';
 
   function handleLookup(submittedAddress) {
-    setWatchlistMessage({ text: '', type: '' });
+    setWatchlistStatus('');
     history.push(`/accounts/${submittedAddress}`, {
       explorerQuery: submittedAddress,
       explorerSearchType: 'address',
@@ -65,16 +65,20 @@ function AccountPage() {
     const result = addToWatchlist(address);
 
     if (result === 'exists') {
-      setWatchlistMessage({
-        text: 'This address is already in your watchlist.',
-        type: 'warning',
+      setWatchlistStatus('warning');
+      showToast({
+        status: 'warning',
+        title: 'Wallet already saved',
+        description: 'This address is already in your saved wallets.',
       });
       return;
     }
 
-    setWatchlistMessage({
-      text: 'Address saved to watchlist.',
-      type: 'success',
+    setWatchlistStatus('success');
+    showToast({
+      status: 'success',
+      title: 'Wallet saved',
+      description: 'This address is now available in Saved wallets.',
     });
   }
 
@@ -124,17 +128,16 @@ function AccountPage() {
                   iconSize={16}
                   onClick={handleSaveToWatchlist}
                 >
-                  Save to Watchlist
+                  <ActionSwap
+                    className="action-swap--watchlist"
+                    value={watchlistStatus === 'success'
+                      ? 'Saved'
+                      : watchlistStatus === 'warning'
+                        ? 'Already saved'
+                        : 'Save to Watchlist'}
+                  />
                 </AnimatedAction>
               </div>
-
-              {watchlistMessage.text ? (
-                <p
-                  className={`watchlist-feedback watchlist-feedback--${watchlistMessage.type}`}
-                >
-                  {watchlistMessage.text}
-                </p>
-              ) : null}
               <MetricStrip label="Account summary" items={[
                 { label: 'Balance', value: formatEth(balance), note: 'Sepolia ETH' },
                 { label: 'Nonce', value: transactionCount ?? '0', note: 'Transactions sent' },

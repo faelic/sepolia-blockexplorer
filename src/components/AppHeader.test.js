@@ -43,6 +43,19 @@ test.each(['/', '/accounts'])(
   },
 );
 
+test('orders desktop header as brand, navigation, Search, then Sepolia testnet', () => {
+  renderHeader('/');
+  const header = screen.getByRole('banner');
+  const brand = screen.getByRole('link', { name: /BlockScan home/i });
+  const navigation = screen.getByRole('navigation', { name: 'Primary navigation' });
+  const search = screen.getByRole('button', { name: 'Search' });
+  const network = screen.getByLabelText('Ethereum Sepolia testnet');
+  const positions = [brand, navigation, search, network]
+    .map((element) => Array.from(header.querySelectorAll('*')).indexOf(element));
+
+  expect(positions).toEqual([...positions].sort((a, b) => a - b));
+});
+
 test('opens empty with autofocus and restores focus after Escape', async () => {
   renderHeader('/');
   const trigger = screen.getByRole('button', { name: 'Search' });
@@ -129,4 +142,22 @@ test('navigates the classified overlay destination with Enter', async () => {
 
   expect(history.location.pathname).toBe('/blocks/97531');
   await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+});
+
+test('opens from global keyboard shortcuts and ignores editable controls', async () => {
+  renderHeader('/accounts');
+
+  fireEvent.keyDown(document.body, { key: 'k', metaKey: true });
+  expect(await screen.findByRole('dialog')).toBeInTheDocument();
+  fireEvent.keyDown(screen.getByLabelText('Search the Sepolia explorer'), { key: 'Escape' });
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+
+  const editable = document.createElement('input');
+  document.body.appendChild(editable);
+  fireEvent.keyDown(editable, { key: '/' });
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  editable.remove();
+
+  fireEvent.keyDown(document.body, { key: '/' });
+  expect(await screen.findByRole('dialog')).toBeInTheDocument();
 });

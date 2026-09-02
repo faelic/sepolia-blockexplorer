@@ -8,7 +8,9 @@ function HomeSearchHero() {
     <section className="home-search-hero" aria-labelledby="home-hero-title">
       <TrackBackground />
       <div className="home-search-hero__content" id="home-hero-copy">
-        <h1 id="home-hero-title">Explore Sepolia in real time.</h1>
+        <h1 id="home-hero-title">
+          Explore <span className="home-search-hero__highlight">Sepolia</span> in real time.
+        </h1>
         <p>Search any block, transaction, or address instantly.</p>
         <ExplorerSearch
           id="hero-explorer-search"

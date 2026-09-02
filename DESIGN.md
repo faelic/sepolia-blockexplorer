@@ -2,19 +2,26 @@
 name: BlockScan
 description: A centered real-data Explorer Mosaic that makes Sepolia search the calm center of a wider onchain world.
 colors:
-  void-black: "#05070a"
-  observatory-surface: "#0b0f0f"
-  elevated-surface: "#111514"
-  primary-text: "#f3f6f2"
-  supporting-copy: "#d4d9d5"
-  secondary-text: "#909a95"
-  tertiary-text: "#707a75"
-  placeholder-text: "#a1aaa6"
-  authentic-teal: "#035352"
-  interactive-teal: "#08706d"
-  deep-teal: "#024241"
-  sidecar-yellow: "#f3e8bc"
-  sidecar-yellow-hover: "#fff1c8"
+  void-black: "#050505"
+  lifted-canvas: "#090909"
+  observatory-surface: "#0d0d0d"
+  elevated-surface: "#141414"
+  strong-surface: "#1b1b1b"
+  primary-text: "#f4f4f4"
+  secondary-text: "#a3a3a3"
+  tertiary-text: "#7d7d7d"
+  brand-accent: "#3b6bff"
+  brand-accent-soft: "rgba(59, 107, 255, 0.14)"
+  brand-accent-line: "rgba(59, 107, 255, 0.34)"
+  interactive-white: "#f4f4f4"
+  interactive-inverse: "#080808"
+  subtle-line: "rgba(255, 255, 255, 0.1)"
+  faint-line: "rgba(255, 255, 255, 0.06)"
+  strong-line: "rgba(255, 255, 255, 0.18)"
+  track-primary: "rgba(255, 255, 255, 0.095)"
+  track-secondary: "rgba(255, 255, 255, 0.052)"
+  track-primary-strong: "rgba(255, 255, 255, 0.14)"
+  track-secondary-strong: "rgba(255, 255, 255, 0.078)"
   status-success: "#78d2a8"
   status-amber: "#d9b36b"
   status-red: "#ff8f86"
@@ -84,8 +91,8 @@ spacing:
   layout: "36px"
 components:
   hero-search-action:
-    backgroundColor: "{colors.sidecar-yellow}"
-    textColor: "{colors.void-black}"
+    backgroundColor: "{colors.elevated-surface}"
+    textColor: "{colors.primary-text}"
     rounded: "{rounded.action}"
     padding: "0 19px"
     width: "120px"
@@ -123,24 +130,20 @@ The system is static-first, honest, and quiet. Local artwork and a committed rea
 - A centered headline, concise support line, and single dominant search action.
 - A real-data mosaic with fixed positions, a calm central exclusion zone, and intentional edge cropping.
 - Seventeen desktop tiles, twelve tablet tiles, and eight mobile tiles rather than one squeezed universal grid.
-- Sidecar Yellow reserved for the primary search action; teal remains structural and atmospheric.
+- Interface chrome is near-monochrome; blue is reserved for Sepolia/network orientation, while other color is reserved for semantic status and identity-bearing content.
 - Complete first paint from local WebPs and a committed snapshot, followed by quiet shared-data updates.
 - Decorative motion is fine-pointer-only, scroll-native, reduced-motion-safe, and subordinate to search.
 
 ## Colors
 
-The palette is mostly black and muted imagery, with warm-white hierarchy, low-volume teal structure, and one warm action signal.
+The interface palette is black, charcoal, warm white, and neutral grey. Sepolia blue is used sparingly for network identity and route orientation; other color is exceptional and communicates status or preserves the identity of token logos and source imagery.
 
 ### Primary
 
-- **Authentic Teal:** Environmental bias, BlockScan identity, and quiet structural accents.
-- **Interactive Teal:** Search focus, lines, compact marks, and small state responses.
-- **Deep Teal:** Low-luminance structure and filled geometric details.
-
-### Secondary
-
-- **Sidecar Yellow:** The hero's one dominant Search action.
-- **Sidecar Yellow Hover:** The only hover lift for that warm action; it stays flat, without glow or gradient.
+- **Interactive White:** Primary actions, active navigation, focus, and high-priority links.
+- **Sepolia Blue:** The hero “Sepolia” word, the network identity dot, and the active navigation underline only.
+- **Charcoal Surfaces:** Layering and control separation without tinted panels.
+- **Neutral Lines:** Structure, routes, tracks, list dividers, and control boundaries.
 
 ### Tertiary
 
@@ -161,9 +164,9 @@ The palette is mostly black and muted imagery, with warm-white hierarchy, low-vo
 
 ### Named Rules
 
-**The One Yellow Action Rule.** Sidecar Yellow belongs to Search in the opening composition; never distribute it across mosaic tiles or passive data.
+**The Restrained Brand Rule.** Sepolia blue may mark network identity and active wayfinding, but controls, links, data rows, diagrams, decoration, and surfaces stay neutral.
 
-**The Teal Is Structure Rule.** Teal establishes identity, focus, and geometry at low volume; it does not tint artwork or become a generic neon Web3 glow.
+**The Color Must Mean Something Rule.** Green confirms success, amber signals pending or caution, and red signals failure, validation, or destructive action. Token logos and content imagery keep their source colors.
 
 ## Typography
 
@@ -213,7 +216,7 @@ Depth comes from one gently receding mosaic plane, subdued imagery, the central 
 
 - **Mosaic Tile Ambient** (`0 12px 32px rgba(0, 0, 0, 0.22)`): A restrained separation between overlapping dark tiles.
 - **Hero Search Ambient** (`0 18px 56px rgba(0, 0, 0, 0.30)`): Keeps the functional search clear of the environmental wall.
-- **Search Focus Ring** (`0 0 0 3px rgba(3, 83, 82, 0.18)`): A structural focus layer paired with the Interactive Teal border.
+- **Search Focus Ring** (`0 0 0 3px rgba(244, 244, 244, 0.14)`): A neutral focus layer paired with a stronger warm-white border.
 
 ### Named Rules
 
@@ -221,7 +224,7 @@ Depth comes from one gently receding mosaic plane, subdued imagery, the central 
 
 ## Shapes
 
-The mosaic uses compact 13px tile corners, the main search uses 15px corners, and its Sidecar Yellow action uses 11px corners. Mobile tiles tighten to 10px. Artwork labels use small 7px corners, while block, route, and address marks alternate between compact squares and circles. One-pixel neutral or teal borders define geometry; there are no oversized pills, composer bubbles, or decorative curves.
+The mosaic uses compact 13px tile corners, the main search uses 15px corners, and its action uses 11px corners. Mobile tiles tighten to 10px. Artwork labels use small 7px corners, while block, route, and address marks alternate between compact squares and circles. One-pixel neutral borders define geometry; there are no oversized pills, composer bubbles, or decorative curves.
 
 ## Components
 
@@ -229,15 +232,15 @@ The mosaic uses compact 13px tile corners, the main search uses 15px corners, an
 
 - **Copy:** Exactly “Search,” paired with the existing arrow icon.
 - **Shape:** 120px by 50px on desktop with 11px corners; 104px by 44px on mobile.
-- **Color:** Sidecar Yellow with Void Black text; hover uses Sidecar Yellow Hover.
-- **State:** Active moves down one pixel. Focus remains visible through the surrounding search focus treatment. There is no gradient, glow, scale, or teal primary fill.
+- **Color:** Elevated charcoal with warm-white iconography; hover strengthens the neutral border and surface.
+- **State:** Active moves down one pixel. Focus remains visible through the surrounding neutral search focus treatment. There is no gradient, glow, scale, or decorative color.
 
 ### Explorer Search
 
 - **Placeholder:** Exactly “Search block, tx hash, or address.”
 - **Surface:** 780px maximum width, 64px height, 15px corners, a one-pixel warm-white border at 25% opacity, and a restrained four-pixel backdrop blur.
 - **Input:** Single-line, 17px Manrope, Primary Text, Placeholder Text, and 22px horizontal padding.
-- **Focus:** Interactive Teal border with the restrained Authentic Teal ring over Elevated Surface.
+- **Focus:** Stronger warm-white border with a restrained neutral ring over Elevated Surface.
 - **Behavior:** Reuses the existing block/transaction/address classifier, route transition, Enter submission, mobile Search/Go behavior, accessible label, and alerting validation error.
 
 ### Navigation
@@ -246,7 +249,7 @@ The existing BlockScan header remains the only global navigation: BlockScan, Hom
 
 ### Mosaic Environment
 
-The environment is decorative and `aria-hidden`. Its fixed configuration keeps each content type in an art-directed slot; live values may change, but ETH, BTC, SOL, LINK, artwork, and chain-data categories never shuffle. A 1480px perspective, subtle whole-plane tilt, central veil, edge fade, and 5.5% Authentic Teal atmosphere create the theatrical field without a flattened hero image.
+The environment is decorative and `aria-hidden`. Its fixed configuration keeps each content type in an art-directed slot; live values may change, but ETH, BTC, SOL, LINK, artwork, and chain-data categories never shuffle. A 1480px perspective, subtle whole-plane tilt, central veil, edge fade, and neutral atmosphere create the theatrical field without a flattened hero image.
 
 ### NFT Artwork Tiles
 

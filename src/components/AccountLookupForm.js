@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { isExplorerAddress } from '../lib/explorerSearch';
 import AnimatedAction from './AnimatedAction';
+import FieldShell from './FieldShell';
 import { SearchIcon } from './icons';
 
 function AccountLookupForm({ onSubmit }) {
@@ -35,37 +36,40 @@ function AccountLookupForm({ onSubmit }) {
       </div>
 
       <form className="lookup-form" onSubmit={handleSubmit}>
-        <label className="lookup-form__label" htmlFor="account-address">
-          Wallet Address
-        </label>
-
-        <input
-          id="account-address"
-          className="lookup-form__input"
-          type="text"
-          inputMode="text"
-          autoComplete="off"
-          spellCheck="false"
-          value={address}
-          aria-invalid={error ? 'true' : undefined}
-          aria-describedby={error ? 'account-address-error' : undefined}
-          onChange={(event) => {
-            setAddress(event.target.value);
-            if (error) setError('');
-          }}
-          placeholder="0x1234…"
-        />
-
-        <AnimatedAction
-          className="lookup-form__button"
-          type="submit"
-          icon={SearchIcon}
-          iconSize={16}
+        <FieldShell
+          className="field-shell--lookup"
+          error={error}
+          errorId="account-address-error"
+          errorClassName="lookup-form__error"
         >
-          View Account
-        </AnimatedAction>
-
-        {error ? <p className="lookup-form__error" id="account-address-error" role="alert">{error}</p> : null}
+          <label className="lookup-form__label" htmlFor="account-address">
+            Wallet Address
+          </label>
+          <input
+            id="account-address"
+            className="lookup-form__input"
+            type="text"
+            inputMode="text"
+            autoComplete="off"
+            spellCheck="false"
+            value={address}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={error ? 'account-address-error' : undefined}
+            onChange={(event) => {
+              setAddress(event.target.value);
+              if (error) setError('');
+            }}
+            placeholder="0x1234…"
+          />
+          <AnimatedAction
+            className="lookup-form__button"
+            type="submit"
+            icon={SearchIcon}
+            iconSize={16}
+          >
+            View Account
+          </AnimatedAction>
+        </FieldShell>
       </form>
     </section>
   );

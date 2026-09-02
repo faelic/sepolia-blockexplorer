@@ -7,6 +7,7 @@ import ResultContent from '../components/ResultContent';
 import ResultHeader from '../components/ResultHeader';
 import ResultSkeleton from '../components/ResultSkeleton';
 import ResultState from '../components/ResultState';
+import StatusBadge from '../components/StatusBadge';
 import { ArrowRightIcon } from '../components/icons';
 import useTransactionDetails from '../hooks/useTransactionDetails';
 import formatEth from '../utils/formatEth';
@@ -47,15 +48,19 @@ function TransactionPage() {
         {!loading && !error && transaction ? (
           <>
             <section className={`status-banner status-banner--${!receipt ? 'pending' : receipt.status === 1 ? 'success' : 'failed'}`}>
-              <span className="status-banner__indicator" aria-hidden="true" />
               <div>
                 <p className="status-banner__label">Transaction status</p>
                 <h2 className="status-banner__value">
-                {!receipt
-                  ? 'Pending'
-                  : receipt.status === 1
-                  ? 'Mined successfully'
-                  : 'Execution failed'}
+                  <StatusBadge
+                    status={!receipt ? 'loading' : receipt.status === 1 ? 'success' : 'danger'}
+                    pulse={!receipt}
+                  >
+                    {!receipt
+                      ? 'Pending'
+                      : receipt.status === 1
+                        ? 'Mined successfully'
+                        : 'Execution failed'}
+                  </StatusBadge>
                 </h2>
                 <p className="status-banner__note">
                   {!receipt ? 'Waiting for block inclusion.' : `Included in block ${receipt.blockNumber}.`}

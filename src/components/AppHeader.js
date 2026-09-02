@@ -70,6 +70,24 @@ function AppHeader() {
       if (event.key === 'Escape') {
         setMenuOpen(false);
         setSearchOpen(false);
+        return;
+      }
+
+      const target = event.target;
+      const isEditable = target instanceof HTMLElement && (
+        target.isContentEditable
+        || target instanceof HTMLInputElement
+        || target instanceof HTMLTextAreaElement
+        || target instanceof HTMLSelectElement
+      );
+      const isCommandShortcut = (event.metaKey || event.ctrlKey)
+        && event.key.toLowerCase() === 'k';
+      const isSlashShortcut = event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey;
+
+      if (!isEditable && (isCommandShortcut || isSlashShortcut)) {
+        event.preventDefault();
+        setSearchOpen(true);
+        setMenuOpen(false);
       }
     }
 
@@ -166,11 +184,6 @@ function AppHeader() {
             </AnimatedAction>
           </nav>
 
-          <span className="app-header__network" aria-label="Ethereum Sepolia testnet">
-            <i aria-hidden="true" />
-            <span aria-hidden="true">Sepolia testnet</span>
-          </span>
-
           <div className="app-header__actions">
             <AnimatedAction
               ref={searchTriggerRef}
@@ -186,7 +199,8 @@ function AppHeader() {
                 setMenuOpen(false);
               }}
             >
-              Search
+              <span>Search</span>
+              <kbd className="search-toggle__shortcut" aria-hidden="true">⌘K</kbd>
             </AnimatedAction>
             <AnimatedAction
               className="header-action nav-toggle"
@@ -203,6 +217,11 @@ function AppHeader() {
               Menu
             </AnimatedAction>
           </div>
+
+          <span className="app-header__network" aria-label="Ethereum Sepolia testnet">
+            <i aria-hidden="true" />
+            <span aria-hidden="true">Sepolia testnet</span>
+          </span>
         </div>
       </header>
       <GlobalExplorerSearch

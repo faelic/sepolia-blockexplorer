@@ -34,10 +34,21 @@ function useWatchlist() {
     );
   }
 
+  function insertIntoWatchlist(address, index) {
+    setWatchlist((currentWatchlist) => {
+      if (currentWatchlist.includes(address)) return currentWatchlist;
+      const next = [...currentWatchlist];
+      const safeIndex = Math.max(0, Math.min(index, next.length));
+      next.splice(safeIndex, 0, address);
+      return next;
+    });
+  }
+
   return {
     watchlist,
     addToWatchlist,
     removeFromWatchlist,
+    insertIntoWatchlist,
   };
 }
 

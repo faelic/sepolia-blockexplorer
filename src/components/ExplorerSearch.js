@@ -10,6 +10,8 @@ import {
 import { useNavigationMotion } from '../motion/NavigationMotionContext';
 import { motionSystem } from '../motion/motionSystem';
 import AnimatedAction from './AnimatedAction';
+import FieldShell from './FieldShell';
+import Tooltip from './Tooltip';
 import { ArrowRightIcon, SearchIcon } from './icons';
 
 const DESTINATION_LABELS = {
@@ -153,10 +155,17 @@ function ExplorerSearch({
       <label className="sr-only" htmlFor={id}>
         Search the Sepolia explorer
       </label>
-      <div
-        className={`explorer-search__controls${InputIcon ? ' has-input-icon' : ''}${error ? ' is-invalid' : ''}`}
-        ref={controlsRef}
+      <FieldShell
+        className="field-shell--explorer"
+        error={error}
+        errorId={errorId}
+        errorClassName="explorer-search__error"
+        reserveMessageSpace={false}
       >
+        <div
+          className={`explorer-search__controls${InputIcon ? ' has-input-icon' : ''}${error ? ' is-invalid' : ''}`}
+          ref={controlsRef}
+        >
         {InputIcon ? (
           <span className="explorer-search__input-icon" aria-hidden="true">
             <InputIcon size={20} />
@@ -187,22 +196,39 @@ function ExplorerSearch({
             if (error) setError('');
           }}
         />
-        {!resultDriven ? (
+        {!resultDriven && !iconOnly ? (
           <AnimatedAction
-            className={`explorer-search__button${iconOnly ? ' explorer-search__button--icon' : ''}`}
+            className="explorer-search__button"
             type="submit"
             icon={buttonIcon}
             iconPosition={buttonIconPosition}
             iconSize={iconOnly ? 20 : 16}
-            aria-label={iconOnly ? 'Search' : undefined}
             aria-busy={pending || undefined}
             disabled={pending}
           >
-            {iconOnly ? <span className="sr-only">Search</span> : <span>Search</span>}
+            <span>Search</span>
             {showPending ? <span className="explorer-search__pending" aria-hidden="true" /> : null}
           </AnimatedAction>
         ) : null}
-      </div>
+        {!resultDriven && iconOnly ? (
+          <Tooltip content="Search">
+            <AnimatedAction
+              className="explorer-search__button explorer-search__button--icon"
+              type="submit"
+              icon={buttonIcon}
+              iconPosition={buttonIconPosition}
+              iconSize={20}
+              aria-label="Search"
+              aria-busy={pending || undefined}
+              disabled={pending}
+            >
+              <span className="sr-only">Search</span>
+              {showPending ? <span className="explorer-search__pending" aria-hidden="true" /> : null}
+            </AnimatedAction>
+          </Tooltip>
+        ) : null}
+        </div>
+      </FieldShell>
 
       <AnimatePresence initial={false} mode="wait">
         {shouldShowPreview && hasQuery ? (
@@ -250,21 +276,6 @@ function ExplorerSearch({
         </p>
       ) : null}
 
-      {error ? (
-        <motion.p
-          className="explorer-search__error"
-          id={errorId}
-          role="alert"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: motionSystem.duration.control,
-            ease: motionSystem.ease.primary,
-          }}
-        >
-          {error}
-        </motion.p>
-      ) : null}
     </form>
   );
 }
