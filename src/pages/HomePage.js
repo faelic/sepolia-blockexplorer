@@ -3,6 +3,7 @@ import LoadingState from '../components/LoadingState';
 import MetricStrip from '../components/MetricStrip';
 import PageIntro from '../components/PageIntro';
 import StatePanel from '../components/StatePanel';
+import CryptoTokenMarquee from '../features/homeHero/CryptoTokenMarquee';
 import HomeSearchHero from '../features/homeHero/HomeSearchHero';
 import useRecentBlocks from '../hooks/useRecentBlocks';
 import formatTimestamp from '../utils/FormatTimestamp';
@@ -14,8 +15,11 @@ function HomePage() {
     0,
   );
   return (
-    <>
+    <div className="home-page">
       <HomeSearchHero />
+      <div className="home-token-marquee-rail">
+        <CryptoTokenMarquee />
+      </div>
       <section
         className="home-activity"
         id="network-activity"
@@ -57,7 +61,7 @@ function HomePage() {
           />
         ) : null}
       </section>
-    </>
+    </div>
   );
 }
 

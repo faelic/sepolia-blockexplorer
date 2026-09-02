@@ -1,6 +1,5 @@
 import ExplorerSearch from '../../components/ExplorerSearch';
 import { SearchIcon } from '../../components/icons';
-import CryptoTokenMarquee from './CryptoTokenMarquee';
 import TrackBackground from './TrackBackground';
 import './homeHero.css';
 
@@ -19,7 +18,6 @@ function HomeSearchHero() {
           submitPresentation="icon-only"
         />
       </div>
-      <CryptoTokenMarquee />
     </section>
   );
 }

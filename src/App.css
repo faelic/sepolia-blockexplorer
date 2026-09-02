@@ -466,16 +466,18 @@
   position: absolute;
   z-index: -1;
   top: -112px;
+  bottom: 0;
   left: 50%;
   width: 100vw;
-  height: 112px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(5, 7, 10, 0.12) 58%,
-    rgba(5, 7, 10, 0.82) 88%,
-    var(--canvas) 100%
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(5, 7, 10, 0.12) 58%,
+      rgba(5, 7, 10, 0.82) 88%,
+      var(--canvas) 100%
+    ) top / 100% 112px no-repeat,
+    linear-gradient(var(--canvas), var(--canvas)) 0 112px / 100% calc(100% - 112px) no-repeat;
   content: '';
   pointer-events: none;
   transform: translateX(-50%);
